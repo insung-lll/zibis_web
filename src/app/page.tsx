@@ -1,19 +1,13 @@
 'use client';
 
 import { useRef } from 'react';
-import { motion, useScroll, useTransform, useInView } from 'framer-motion';
+import { useInView } from 'framer-motion';
 import Link from 'next/link';
 import RevealText from '@/components/RevealText';
 import ProjectCard from '@/components/ProjectCard';
 
 export default function Home() {
   const containerRef = useRef<HTMLDivElement>(null);
-
-  const { scrollY } = useScroll();
-
-  // Parallax translation and fading out for hero section
-  const heroY = useTransform(scrollY, [0, 800], [0, 240]);
-  const heroOpacity = useTransform(scrollY, [0, 600], [1, 0]);
 
   // CTA 타이틀 리빌 감지 (문단 리빌을 이 트리거에 이어붙여 스크롤 속도와 무관하게 간격을 고정)
   const ctaTitleRef = useRef<HTMLDivElement>(null);
@@ -56,11 +50,11 @@ export default function Home() {
   ];
 
   return (
-    <div ref={containerRef} className="relative w-full overflow-hidden bg-[#F9F9F7]">
-      {/* 1. Hero Section (Parallax scroll) */}
-      <motion.section 
-        style={{ y: heroY, opacity: heroOpacity }}
-        className="relative z-0 min-h-screen w-full flex flex-col justify-end px-6 pb-20 md:px-12 md:pb-24 bg-[#EBEBE9]"
+    // overflow-hidden은 sticky를 무력화하므로 가로 넘침만 잘라내는 overflow-x-clip 사용
+    <div ref={containerRef} className="relative w-full overflow-x-clip bg-[#F9F9F7]">
+      {/* 1. Hero Section — sticky로 화면에 고정, 다음 섹션이 위로 올라와 덮는 스택 스크롤 */}
+      <section
+        className="sticky top-0 z-0 h-screen w-full flex flex-col justify-end px-6 pb-20 md:px-12 md:pb-24 bg-[#EBEBE9] overflow-hidden"
       >
         {/* Geometric block overlay */}
         <div className="absolute inset-0 grid grid-cols-12 gap-0 pointer-events-none opacity-40">
@@ -103,7 +97,7 @@ export default function Home() {
           </div>
           <span className="relative z-10 ml-2 text-[#F9F9F7] pointer-events-none select-none leading-[14px]">→</span>
         </Link>
-      </motion.section>
+      </section>
 
       {/* 2. Content Section (Stacking over hero) */}
       <section className="relative z-10 bg-[#F9F9F7] px-6 py-24 md:px-12 md:py-36 shadow-[0_-15px_30px_rgba(0,0,0,0.03)]">
