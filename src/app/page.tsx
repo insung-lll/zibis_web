@@ -118,7 +118,7 @@ export default function Home() {
           <div className="lg:col-span-8 space-y-8">
             <RevealText 
               as="h2" 
-              className="text-2xl md:text-4xl font-bold tracking-[-0.01em] leading-tight max-w-none text-[#111111]"
+              className="text-2xl md:text-3xl font-bold tracking-[-0.01em] leading-tight max-w-none text-[#111111]"
             >
               {"We design spaces for people.\nNo matter the scale of the projects,\nour down-to-earth approach stays the same."}
             </RevealText>
