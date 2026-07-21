@@ -78,9 +78,17 @@ export default function MenuOverlay({ isOpen, onClose, onOpenContact }: MenuOver
               onClose();
               onOpenContact();
             }}
-            className="hidden sm:block border border-[#F9F9F7]/20 px-5 py-2 text-xs uppercase tracking-widest text-[#F9F9F7] transition hover:bg-[#F9F9F7] hover:text-[#111111]"
+            className="group relative hidden sm:inline-flex items-center pb-1 text-xs uppercase tracking-widest text-[#F9F9F7]"
           >
-            무료 견적 상담
+            <span className="relative z-10 h-[14px] overflow-hidden flex flex-col justify-start pointer-events-none select-none leading-[14px]">
+              <span className="transition-transform duration-500 ease-[0.76,0,0.24,1] group-hover:-translate-y-full block">
+                CONTACT US
+              </span>
+              <span className="transition-transform duration-500 ease-[0.76,0,0.24,1] group-hover:-translate-y-full block absolute top-full left-0 right-0">
+                CONTACT US
+              </span>
+            </span>
+            <span className="absolute bottom-0 left-0 w-0 h-[1px] bg-[#F9F9F7] transition-all duration-300 group-hover:w-full" />
           </button>
           <button 
             onClick={onClose} 
