@@ -1,12 +1,28 @@
 import type { Metadata } from "next";
-import { Outfit } from "next/font/google";
+import { Manrope, Plus_Jakarta_Sans } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 import LayoutWrapper from "@/components/LayoutWrapper";
 
-const outfit = Outfit({
+const manrope = Manrope({
   subsets: ["latin"],
-  variable: "--font-outfit",
-  weight: ["300", "400", "500", "600", "700"],
+  variable: "--font-manrope",
+  weight: ["300", "400", "500", "600", "700", "800"],
+  display: "swap",
+});
+
+const plusJakartaSans = Plus_Jakarta_Sans({
+  subsets: ["latin"],
+  variable: "--font-plus-jakarta-sans",
+  weight: ["300", "400", "500", "600", "700", "800"],
+  display: "swap",
+});
+
+// 한글 렌더링용 — Manrope/Plus Jakarta Sans/시스템 폰트는 라틴 문자 전용이라 한글은 이 폰트로 대체됨
+const pretendard = localFont({
+  src: "../../node_modules/pretendard/dist/web/variable/woff2/PretendardVariable.woff2",
+  variable: "--font-pretendard",
+  weight: "45 920",
   display: "swap",
 });
 
@@ -74,7 +90,7 @@ export default function RootLayout({
   return (
     <html
       lang="ko"
-      className={`${outfit.variable} h-full antialiased`}
+      className={`${manrope.variable} ${plusJakartaSans.variable} ${pretendard.variable} h-full antialiased`}
     >
       <head>
         <script

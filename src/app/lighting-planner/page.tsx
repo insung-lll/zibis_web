@@ -46,13 +46,13 @@ export default function LightingPlannerPage() {
           </span>
           <RevealText 
             as="h1" 
-            className="text-4xl md:text-6xl font-light tracking-tight uppercase"
+            className="text-4xl md:text-6xl font-light tracking-tight leading-none uppercase"
           >
             {"Lighting Planner\n& Design Process"}
           </RevealText>
-          <p className="text-base font-light leading-relaxed text-[#111111]/60 mt-4">
+          <RevealText delay={0.25} className="text-base font-light leading-relaxed text-[#111111]/60 mt-4">
             Architecture is a vessel that holds light. ZIBIS assigns a dedicated lighting planner to guide you through our unique lighting design and smart control automation engineering from concept to completion.
-          </p>
+          </RevealText>
         </div>
 
         {/* Process Steps */}
@@ -66,7 +66,7 @@ export default function LightingPlannerPage() {
                   ({step.step})
                 </span>
                 <div>
-                  <h3 className="text-lg md:text-xl font-medium tracking-wide text-[#111111]">
+                  <h3 className="text-lg md:text-xl font-medium tracking-[-0.01em] leading-snug text-[#111111]">
                     {step.title}
                   </h3>
                 </div>

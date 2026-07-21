@@ -1,22 +1,73 @@
 'use client';
 
 import { useRef, useState, useEffect } from 'react';
+import { motion, useMotionValue, animate } from 'framer-motion';
 import RevealText from '@/components/RevealText';
+
+// 러버밴드(고무줄) 오버스크롤 튜닝값 — iOS 스타일: 당길수록 저항이 점점 세져서 MAX값엔 점근만 함(벽에 부딪히지 않음)
+const RUBBER_BAND_MAX = 70; // 시각적으로 당겨지는 최대 픽셀
+const RUBBER_BAND_CONST = 0.55; // 저항 강도 (클수록 빨리 뻑뻑해짐)
+const RUBBER_BAND_RELEASE_DELAY = 70; // 휠 입력이 멈췄다고 판단하는 시간(ms)
+
+// 당긴 원시 거리(raw)를 점근적으로 감쇠시켜 실제 표시 오프셋으로 변환
+function dampRubberBand(raw: number) {
+  const sign = Math.sign(raw);
+  const abs = Math.abs(raw);
+  return sign * (1 - 1 / (abs * RUBBER_BAND_CONST / RUBBER_BAND_MAX + 1)) * RUBBER_BAND_MAX;
+}
 
 export default function ProjectsClient() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [scrollPercent, setScrollPercent] = useState(0);
+  const overscrollX = useMotionValue(0);
+  const rawPull = useRef(0); // 감쇠 전 누적 당김량
 
   useEffect(() => {
     const container = containerRef.current;
     if (!container) return;
+
+    let releaseTimer: ReturnType<typeof setTimeout> | null = null;
+
+    const releaseRubberBand = (fast = false) => {
+      rawPull.current = 0;
+      // 바운스 없는 이즈아웃 트윈으로 즉시 원위치 복귀 (자연스러운 감속)
+      animate(overscrollX, 0, fast
+        ? { duration: 0.3, ease: [0.22, 1, 0.36, 1] }
+        : { duration: 0.5, ease: [0.22, 1, 0.36, 1] }
+      );
+    };
 
     const handleWheel = (e: WheelEvent) => {
       // 수직 휠 움직임이 있는 경우에만 가로 스크롤로 변환
       // 가로 스크롤(트랙패드 좌우 스와이프)인 경우 기본 동작 허용
       if (e.deltaY !== 0 && Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
         e.preventDefault();
-        container.scrollLeft += e.deltaY;
+
+        const maxScrollLeft = container.scrollWidth - container.clientWidth;
+        const atStart = container.scrollLeft <= 0;
+        const atEnd = container.scrollLeft >= maxScrollLeft - 1;
+
+        if ((atEnd && e.deltaY > 0) || (atStart && e.deltaY < 0)) {
+          // 트랙패드에서 손을 떼었을 때 발생하는 미세한 관성(momentum) 스크롤 무시하고 즉시 복귀 (임계값 높임)
+          if (Math.abs(e.deltaY) < 15) {
+            if (releaseTimer) clearTimeout(releaseTimer);
+            if (overscrollX.get() !== 0) releaseRubberBand(true);
+            return;
+          }
+
+          // 스크롤 끝에서 계속 밀면 고무줄처럼 저항감 있게 살짝 딸려옴
+          // set()으로 즉시 점프시키지 않고 짧은 이즈아웃 트윈으로 보간해 부드럽게 당겨지도록 함
+          rawPull.current -= e.deltaY;
+          const target = dampRubberBand(rawPull.current);
+          animate(overscrollX, target, { duration: 0.25, ease: [0.25, 1, 0.5, 1] });
+
+          if (releaseTimer) clearTimeout(releaseTimer);
+          releaseTimer = setTimeout(() => releaseRubberBand(false), RUBBER_BAND_RELEASE_DELAY);
+        } else {
+          if (releaseTimer) clearTimeout(releaseTimer);
+          if (overscrollX.get() !== 0) releaseRubberBand(true);
+          container.scrollLeft += e.deltaY;
+        }
       }
     };
 
@@ -37,10 +88,11 @@ export default function ProjectsClient() {
     handleScroll();
 
     return () => {
+      if (releaseTimer) clearTimeout(releaseTimer);
       container.removeEventListener('wheel', handleWheel);
       container.removeEventListener('scroll', handleScroll);
     };
-  }, []);
+  }, [overscrollX]);
 
   const allProjects = [
     {
@@ -93,9 +145,16 @@ export default function ProjectsClient() {
         >
 
           {/* 프로젝트 리스트가 가로로 나열되는 내부 영역 (w-max로 콘텐츠 너비 확보) */}
-          <div className="flex items-end space-x-4 pl-12 md:pl-24 pr-5 h-[60vh] w-max">
+          {/* overscrollX: 스크롤 끝에서의 러버밴드 효과를 위한 별도 트랜스폼 레이어 */}
+          <motion.div style={{ x: overscrollX }} className="flex items-end space-x-4 pl-12 md:pl-24 pr-5 h-[60vh] w-max">
             {allProjects.map((project, idx) => (
-              <div key={idx} className={`flex-shrink-0 flex flex-col space-y-4 ${project.width}`}>
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, y: 40 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, ease: [0.65, 0, 0.35, 1], delay: 0.2 + idx * 0.09 }}
+                className={`flex-shrink-0 flex flex-col space-y-4 ${project.width}`}
+              >
 
                 <div className={`relative overflow-hidden ${project.colorClass} ${project.aspect} w-full`}>
                   <div className="absolute inset-0 bg-black/5 opacity-0 hover:opacity-100 transition-opacity duration-500" />
@@ -105,16 +164,16 @@ export default function ProjectsClient() {
                   {project.title}
                 </span>
 
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
 
         {/* 하단 고정 인디케이터 및 대형 타이틀 바 */}
         <div className="fixed bottom-0 left-0 right-0 px-6 pb-6 md:px-12 md:pb-12 z-20 flex justify-between items-end bg-transparent pointer-events-none select-none">
 
           <div className="pointer-events-auto">
-            <RevealText as="h2" delay={0.3} className="text-8xl md:text-[7rem] font-bold tracking-tighter leading-[0.8] text-[#111111] uppercase select-none pr-2 md:pr-4">
+            <RevealText as="h2" delay={0.3} className="text-8xl md:text-[7rem] font-bold tracking-tighter leading-none text-[#111111] uppercase select-none pr-2 md:pr-4">
               Projects
             </RevealText>
           </div>
@@ -133,7 +192,7 @@ export default function ProjectsClient() {
 
       {/* 모바일: 일반적인 세로 스크롤, 카드가 폭을 꽉 채우며 아래로 쌓이는 방식 */}
       <div className="md:hidden w-full min-h-screen bg-[#F9F9F7] text-[#111111] px-6 pt-28 pb-20">
-        <h2 className="text-5xl font-bold tracking-tighter leading-[0.9] text-[#111111] uppercase select-none mb-12">
+        <h2 className="text-5xl font-bold tracking-tighter leading-none text-[#111111] uppercase select-none mb-12">
           Projects
         </h2>
 

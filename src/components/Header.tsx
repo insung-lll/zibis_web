@@ -73,29 +73,36 @@ export default function Header({ onOpenMenu, onOpenContact }: HeaderProps) {
         </div>
 
         {/* 중앙 영역 (화면 기준 절대 정중앙 배치) */}
-        <nav className="hidden md:flex absolute left-1/2 transform -translate-x-1/2 items-center space-x-8 text-[11px] font-semibold tracking-widest uppercase">
+        <nav className="hidden md:flex absolute left-1/2 transform -translate-x-1/2 items-center space-x-4 text-[11px] font-semibold tracking-widest uppercase">
           <NavLink href="/projects">Projects</NavLink>
+          <span className="w-[3px] h-[3px] rounded-full bg-[#111111]/40 shrink-0" />
           <NavLink href="/about">About</NavLink>
+          <span className="w-[3px] h-[3px] rounded-full bg-[#111111]/40 shrink-0" />
+          <NavLink href="/b2b">B2B</NavLink>
+          <span className="w-[3px] h-[3px] rounded-full bg-[#111111]/40 shrink-0" />
           <NavLink href="/lighting-planner">lighting planner</NavLink>
-          <NavLink href="/gallery">Gallery</NavLink>
+          <span className="w-[3px] h-[3px] rounded-full bg-[#111111]/40 shrink-0" />
+          <NavLink href="/news">News</NavLink>
+          <span className="w-[3px] h-[3px] rounded-full bg-[#111111]/40 shrink-0" />
+          <NavLink href="/resources">Resources</NavLink>
         </nav>
 
         {/* 우측 영역 (상담 버튼) : 모바일에서는 플로팅 버튼이 항상 대신 노출되므로 데스크톱 전용 */}
         <div className="flex-1 hidden md:flex justify-end items-center">
-          {/* GET IN TOUCH (기본 블랙 버튼, 텍스트 롤링, 동그라미 표식) */}
+          {/* CONTACT US (기본 블랙 버튼, 텍스트 롤링, 동그라미 표식) */}
           <button
             onClick={onOpenContact}
-            className="relative overflow-hidden group bg-[#111111] border border-[#111111] rounded-full px-6 py-3 text-xs font-semibold tracking-widest uppercase text-[#F9F9F7] z-10 flex items-center justify-center min-w-[170px]"
+            className="relative overflow-hidden group bg-[#036CC5] border border-[#036CC5] rounded-full px-6 py-3 text-xs font-semibold tracking-widest uppercase text-[#F9F9F7] z-10 flex items-center justify-center min-w-[170px]"
           >
             <div className="relative z-10 h-[14px] overflow-hidden flex flex-col justify-start pointer-events-none select-none leading-[14px] text-center w-full">
               <span className="transition-transform duration-500 ease-[0.76,0,0.24,1] group-hover:-translate-y-full block text-[#F9F9F7]">
-                GET IN TOUCH
+                CONTACT US
               </span>
               <span className="transition-transform duration-500 ease-[0.76,0,0.24,1] group-hover:-translate-y-full block absolute top-full text-[#F9F9F7] left-0 right-0">
-                GET IN TOUCH
+                CONTACT US
               </span>
             </div>
-            <span className="w-1.5 h-1.5 rounded-full border border-[#F9F9F7] inline-block ml-3 relative z-10" />
+            <span className="w-1.5 h-1.5 rounded-full border border-[#F9F9F7] inline-block ml-3 relative z-10 transition-all duration-300 group-hover:w-1 group-hover:h-1 group-hover:bg-[#F9F9F7]" />
           </button>
         </div>
       </header>
@@ -112,20 +119,20 @@ export default function Header({ onOpenMenu, onOpenContact }: HeaderProps) {
               transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] as const }}
               className="flex items-center space-x-2 md:space-x-3"
             >
-              {/* GET IN TOUCH (1번 헤더와 완벽히 동일한 크기/스타일) */}
+              {/* CONTACT US (1번 헤더와 완벽히 동일한 크기/스타일) */}
               <button
                 onClick={onOpenContact}
-                className="relative overflow-hidden group bg-[#111111] border border-[#111111] rounded-full px-4 py-2.5 text-[10px] md:px-6 md:py-3 md:text-xs font-semibold tracking-widest uppercase text-[#F9F9F7] z-10 flex items-center justify-center min-w-[124px] md:min-w-[170px]"
+                className="relative overflow-hidden group bg-[#036CC5] border border-[#036CC5] rounded-full px-4 py-2.5 text-[10px] md:px-6 md:py-3 md:text-xs font-semibold tracking-widest uppercase text-[#F9F9F7] z-10 flex items-center justify-center min-w-[124px] md:min-w-[170px]"
               >
                 <div className="relative z-10 h-[14px] overflow-hidden flex flex-col justify-start pointer-events-none select-none leading-[14px] text-center w-full">
                   <span className="transition-transform duration-500 ease-[0.76,0,0.24,1] group-hover:-translate-y-full block text-[#F9F9F7]">
-                    GET IN TOUCH
+                    CONTACT US
                   </span>
                   <span className="transition-transform duration-500 ease-[0.76,0,0.24,1] group-hover:-translate-y-full block absolute top-full text-[#F9F9F7] left-0 right-0">
-                    GET IN TOUCH
+                    CONTACT US
                   </span>
                 </div>
-                <span className="w-1.5 h-1.5 rounded-full border border-[#F9F9F7] inline-block ml-2 md:ml-3 relative z-10" />
+                <span className="w-1.5 h-1.5 rounded-full border border-[#F9F9F7] inline-block ml-2 md:ml-3 relative z-10 transition-all duration-300 group-hover:w-1 group-hover:h-1 group-hover:bg-[#F9F9F7]" />
               </button>
 
               {/* MENU 버튼 (1번 헤더와 완벽히 동일한 크기/스타일) */}

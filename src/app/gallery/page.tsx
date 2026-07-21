@@ -30,13 +30,13 @@ export default function GalleryPage() {
           </span>
           <RevealText 
             as="h1" 
-            className="text-4xl md:text-6xl font-light tracking-tight uppercase"
+            className="text-4xl md:text-6xl font-light tracking-tight leading-none uppercase"
           >
             {"Gallery Archive\nof spatial form"}
           </RevealText>
-          <p className="text-sm font-light leading-relaxed text-[#111111]/60">
+          <RevealText delay={0.25} className="text-sm font-light leading-relaxed text-[#111111]/60">
             An archive showcasing the harmony of spatial proportions, materials, textures, and shading contrasts through geometric monochrome studies.
-          </p>
+          </RevealText>
         </div>
 
         {/* Gallery Grid */}

@@ -1,19 +1,23 @@
 'use client';
 
 import { useRef } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll, useTransform, useInView } from 'framer-motion';
 import Link from 'next/link';
 import RevealText from '@/components/RevealText';
 import ProjectCard from '@/components/ProjectCard';
 
 export default function Home() {
   const containerRef = useRef<HTMLDivElement>(null);
-  
+
   const { scrollY } = useScroll();
-  
+
   // Parallax translation and fading out for hero section
   const heroY = useTransform(scrollY, [0, 800], [0, 240]);
   const heroOpacity = useTransform(scrollY, [0, 600], [1, 0]);
+
+  // CTA 타이틀 리빌 감지 (문단 리빌을 이 트리거에 이어붙여 스크롤 속도와 무관하게 간격을 고정)
+  const ctaTitleRef = useRef<HTMLDivElement>(null);
+  const ctaTitleInView = useInView(ctaTitleRef, { margin: "-8% 0px", once: true });
 
   // Selected works data
   const projects = [
@@ -72,7 +76,7 @@ export default function Home() {
           {/* upgraded reveal text */}
           <RevealText 
             as="h1" 
-            className="text-4xl sm:text-6xl md:text-7xl font-light tracking-tight leading-[0.9] text-[#111111] max-w-5xl"
+            className="text-lg sm:text-3xl md:text-4xl font-light tracking-tight leading-none text-[#111111] max-w-5xl"
           >
             {"The ZIBIS style is defined by\nstrong, solid forms with subtle elegance,\nnatural balance and enduring appeal"}
           </RevealText>
@@ -83,6 +87,22 @@ export default function Home() {
             </span>
           </div>
         </div>
+
+        {/* View Project — 히어로 우측 하단, 대표 프로젝트로 이동 (oharchitecture 레퍼런스) */}
+        <Link
+          href="/projects"
+          className="absolute bottom-20 right-6 md:bottom-24 md:right-12 z-10 group bg-[#111111] border border-[#111111] rounded-full px-6 py-3 text-xs font-semibold tracking-widest uppercase text-[#F9F9F7] inline-flex items-center justify-center overflow-hidden"
+        >
+          <div className="relative z-10 h-[14px] overflow-hidden flex flex-col justify-start pointer-events-none select-none leading-[14px] text-center">
+            <span className="transition-transform duration-500 ease-[0.76,0,0.24,1] group-hover:-translate-y-full block text-[#F9F9F7]">
+              View Project
+            </span>
+            <span className="transition-transform duration-500 ease-[0.76,0,0.24,1] group-hover:-translate-y-full block absolute top-full text-[#F9F9F7] left-0 right-0">
+              View Project
+            </span>
+          </div>
+          <span className="relative z-10 ml-2 text-[#F9F9F7] pointer-events-none select-none leading-[14px]">→</span>
+        </Link>
       </motion.section>
 
       {/* 2. Content Section (Stacking over hero) */}
@@ -98,9 +118,9 @@ export default function Home() {
           <div className="lg:col-span-8 space-y-8">
             <RevealText 
               as="h2" 
-              className="text-2xl md:text-4xl font-bold tracking-wide leading-[0.9] max-w-2xl text-[#111111]"
+              className="text-2xl md:text-4xl font-bold tracking-[-0.01em] leading-tight max-w-none text-[#111111]"
             >
-              {"We design spaces for people. No matter the scale\nof the projects, our down-to-earth approach stays the same."}
+              {"We design spaces for people.\nNo matter the scale of the projects,\nour down-to-earth approach stays the same."}
             </RevealText>
             <RevealText 
               delay={0.4} 
@@ -111,16 +131,18 @@ export default function Home() {
             <div className="pt-4">
               <Link
                 href="/about"
-                className="relative overflow-hidden group bg-[#111111] border border-[#111111] rounded-full px-6 py-3 text-xs font-semibold tracking-widest uppercase text-[#F9F9F7] inline-flex items-center justify-center min-w-[240px] z-10"
+                className="relative overflow-hidden group bg-[#036CC5] border border-[#036CC5] rounded-full px-6 py-3 text-xs font-semibold tracking-widest uppercase text-[#F9F9F7] inline-flex items-center justify-center min-w-[240px] z-10"
               >
-                <div className="relative z-10 h-[14px] overflow-hidden flex flex-col justify-start pointer-events-none select-none leading-[14px] text-center w-full">
+                {/* 텍스트만 롤링되고 화살표는 고정되도록 분리 */}
+                <div className="relative z-10 h-[14px] overflow-hidden flex flex-col justify-start pointer-events-none select-none leading-[14px] text-center">
                   <span className="transition-transform duration-500 ease-[0.76,0,0.24,1] group-hover:-translate-y-full block text-[#F9F9F7]">
-                    learn more about our studio →
+                    learn more about our studio
                   </span>
                   <span className="transition-transform duration-500 ease-[0.76,0,0.24,1] group-hover:-translate-y-full block absolute top-full text-[#F9F9F7] left-0 right-0">
-                    learn more about our studio →
+                    learn more about our studio
                   </span>
                 </div>
+                <span className="relative z-10 ml-2 text-[#F9F9F7] pointer-events-none select-none leading-[14px]">→</span>
               </Link>
             </div>
           </div>
@@ -129,7 +151,7 @@ export default function Home() {
         {/* Selected Works Grid */}
         <div className="max-w-7xl mx-auto space-y-12">
           <div className="flex justify-between items-end border-b border-[#111111]/10 pb-6 mb-12">
-            <RevealText as="h3" className="text-xl md:text-3xl font-light tracking-wide uppercase">
+            <RevealText as="h3" className="text-xl md:text-3xl font-light tracking-[-0.01em] leading-snug uppercase">
               Featured Works
             </RevealText>
             <Link href="/projects" className="text-xs font-semibold tracking-widest uppercase text-[#111111]/60 hover:text-[#111111] transition">
@@ -158,20 +180,26 @@ export default function Home() {
             (Get in touch)
           </span>
           
+          <div ref={ctaTitleRef}>
+            <RevealText
+              as="h2"
+              className="text-3xl md:text-5xl font-medium tracking-tight max-w-2xl mx-auto leading-none"
+            >
+              {"Ready to design your\nnext inspired space?"}
+            </RevealText>
+          </div>
+
           <RevealText
-            as="h2"
-            className="text-3xl md:text-5xl font-light tracking-wide max-w-2xl mx-auto leading-tight"
+            externalInView={ctaTitleInView}
+            delay={0.5}
+            className="text-sm font-light leading-relaxed text-[#111111]/60 max-w-md mx-auto"
           >
-            {"Ready to design your\nnext inspired space?"}
-          </RevealText>
-          
-          <p className="text-sm font-light text-[#111111]/60 max-w-md mx-auto">
             With our structured process, we prioritize clarity, collaboration, and your unique vision to shape spaces that simply work for how you live.
-          </p>
+          </RevealText>
           <div className="pt-4 flex justify-center">
             <button
               onClick={() => (window as any).lenis?.scrollTo(0)} // Scroll up to trigger navigation contact modal
-              className="relative overflow-hidden group bg-[#111111] border border-[#111111] rounded-full px-8 py-4 text-xs font-semibold tracking-widest uppercase text-[#F9F9F7] inline-flex items-center justify-center min-w-[260px] z-10"
+              className="relative overflow-hidden group bg-[#036CC5] border border-[#036CC5] rounded-full px-8 py-4 text-xs font-semibold tracking-widest uppercase text-[#F9F9F7] inline-flex items-center justify-center min-w-[260px] z-10"
             >
               <div className="relative z-10 h-[14px] overflow-hidden flex flex-col justify-start pointer-events-none select-none leading-[14px] text-center w-full">
                 <span className="transition-transform duration-500 ease-[0.76,0,0.24,1] group-hover:-translate-y-full block text-[#F9F9F7]">

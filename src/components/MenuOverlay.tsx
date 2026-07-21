@@ -54,8 +54,10 @@ export default function MenuOverlay({ isOpen, onClose, onOpenContact }: MenuOver
     { name: 'Home', href: '/' },
     { name: 'Projects', href: '/projects' },
     { name: 'About', href: '/about' },
+    { name: 'B2B', href: '/b2b' },
     { name: 'lighting planner', href: '/lighting-planner' },
-    { name: 'Gallery', href: '/gallery' },
+    { name: 'News', href: '/news' },
+    { name: 'Resources', href: '/resources' },
   ];
 
   return (
@@ -104,7 +106,7 @@ export default function MenuOverlay({ isOpen, onClose, onOpenContact }: MenuOver
                 <Link
                   href={item.href}
                   onClick={onClose}
-                  className={`group relative inline-flex items-center text-4xl sm:text-6xl lg:text-7xl font-light tracking-wide uppercase transition duration-300 ${
+                  className={`group relative inline-flex items-center text-4xl sm:text-6xl lg:text-7xl font-light tracking-tight leading-none uppercase transition duration-300 ${
                     isActive ? 'text-[#F9F9F7]' : 'text-[#F9F9F7]/50 hover:text-[#F9F9F7]'
                   }`}
                 >

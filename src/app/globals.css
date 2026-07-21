@@ -11,7 +11,8 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-outfit), var(--font-pretendard), sans-serif;
+  --font-sans: var(--font-manrope), var(--font-plus-jakarta-sans), -apple-system, BlinkMacSystemFont,
+    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif, var(--font-pretendard);
 }
 
 body {
@@ -104,6 +105,6 @@ a:hover .btn-circle-bg {
   margin-right: -0.2em;
 }
 
-.split-word {
-  padding-right: 0.1em; /* Give the word itself breathing room so the last letter doesn't get chopped */
-}
+/* 주의: .split-word에 padding/margin을 추가하면 SplitType이 측정한 줄 폭과 실제 렌더 폭이
+   어긋나 줄 끝 단어가 줄 안에서 어색하게 재줄바꿈됨 (마지막 글자 잘림은 .split-line의
+   padding-right 보정으로 해결) */

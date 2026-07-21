@@ -38,10 +38,10 @@ export default function ProjectCard({
       {/* 텍스트 설명 정보 */}
       <div className="mt-4 flex justify-between items-start text-xs tracking-wider text-[#111111]">
         <div className="space-y-1">
-          <h4 className="font-medium text-sm tracking-wide group-hover:translate-x-1 transition-transform duration-300">
+          <h4 className="font-medium text-sm tracking-normal group-hover:translate-x-1 transition-transform duration-300">
             {title}
           </h4>
-          <span className="text-[10px] uppercase text-[#111111]/50 block font-light">
+          <span className="text-[10px] tracking-wide uppercase text-[#111111]/50 block font-light">
             {category}
           </span>
         </div>

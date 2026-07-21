@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useInView, useAnimate } from 'framer-motion';
 import SplitType from 'split-type';
 import React from 'react';
@@ -11,6 +11,8 @@ interface RevealTextProps {
   delay?: number;
   once?: boolean;
   colorWipe?: boolean;
+  /** 지정하면 자체 스크롤 감지 대신 이 값을 트리거로 사용 (다른 요소의 리빌 직후로 이어붙일 때) */
+  externalInView?: boolean;
   as?: 'h1' | 'h2' | 'h3' | 'h4' | 'p' | 'span' | 'div';
 }
 
@@ -20,35 +22,51 @@ export default function RevealText({
   delay = 0,
   once = true,
   colorWipe = false,
+  externalInView,
   as: Component = 'p'
 }: RevealTextProps) {
   const [scope, animate] = useAnimate();
-  const isInView = useInView(scope, { once, margin: "-8% 0px" });
+  const detectedInView = useInView(scope, { once, margin: "-8% 0px" });
+  const isInView = externalInView !== undefined ? externalInView : detectedInView;
   const splitRef = useRef<SplitType | null>(null);
+  // 폰트 로딩(document.fonts.ready)이 끝나 분할이 실제로 완료됐는지 여부.
+  // isInView가 분할 완료보다 먼저 true가 되면 리빌 대상 요소가 아직 없어 애니메이션이 아예 안 걸리는
+  // 경쟁 조건이 있었음 — 이 상태를 별도로 추적해서 둘 다 준비됐을 때 리빌이 걸리도록 함.
+  const [isSplitReady, setIsSplitReady] = useState(false);
 
   useEffect(() => {
     if (!scope.current) return;
 
-    // split-type을 사용하여 텍스트를 자동 라인 분할 및 마스킹 처리
-    splitRef.current = new SplitType(scope.current, {
-      types: 'lines,words',
-      lineClass: 'split-line block overflow-hidden relative',
-      wordClass: 'split-word block origin-left inline-block'
-    });
+    let isMounted = true;
 
-    // FOUC 방지: 렌더링 즉시 105% 밑으로 숨기고 1.5도 회전
-    const words = scope.current.querySelectorAll('.split-word');
-    words.forEach((w: Element) => {
-      (w as HTMLElement).style.transform = 'translateY(105%) rotate(1.5deg)';
+    // 커스텀 폰트 로드 완료 후 분할하여 어색한 줄바꿈 방지
+    document.fonts.ready.then(() => {
+      if (!isMounted || !scope.current) return;
+
+      // split-type을 사용하여 텍스트를 자동 라인 분할 및 마스킹 처리
+      splitRef.current = new SplitType(scope.current, {
+        types: 'lines,words',
+        lineClass: 'split-line block overflow-hidden relative',
+        wordClass: 'split-word origin-left inline-block' // 'block' 중복 제거
+      });
+
+      // FOUC 방지: 렌더링 즉시 105% 밑으로 숨기고 1.5도 회전
+      const words = scope.current.querySelectorAll('.split-word');
+      words.forEach((w: Element) => {
+        (w as HTMLElement).style.transform = 'translateY(105%) rotate(1.5deg)';
+      });
+
+      setIsSplitReady(true);
     });
 
     return () => {
+      isMounted = false;
       if (splitRef.current) splitRef.current.revert();
     };
   }, [scope, colorWipe]);
 
   useEffect(() => {
-    if (isInView && scope.current) {
+    if (isInView && isSplitReady && scope.current) {
       const lines = scope.current.querySelectorAll('.split-line');
       
       lines.forEach((line: Element, index: number) => {
@@ -78,10 +96,33 @@ export default function RevealText({
         }
       });
     }
-  }, [isInView, scope, animate, delay, colorWipe]);
+    
+    // 리사이즈 시 라인 재계산
+    // split()이 .split-word를 전부 새로 만들기 때문에, 재분할 직후 현재 리빌 상태에 맞는
+    // 트랜스폼을 다시 걸어주지 않으면 새 단어들이 숨김 처리 없이 그대로 노출되어 버림
+    const handleResize = () => {
+      if (splitRef.current) {
+        splitRef.current.split({});
+        const words = scope.current?.querySelectorAll('.split-word');
+        words?.forEach((w: Element) => {
+          (w as HTMLElement).style.transform = isInView
+            ? 'translateY(0%) rotate(0deg)'
+            : 'translateY(105%) rotate(1.5deg)';
+        });
+      }
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, [isInView, isSplitReady, scope, animate, delay, colorWipe]);
 
   return (
-    <Component ref={scope} className={`relative block ${className}`}>
+    // 분할+숨김 처리가 끝나기 전까지는 래퍼 자체를 감춰서, 원문 텍스트가 마스킹 없이
+    // 먼저 노출됐다가 뒤늦게 숨겨지는 FOUC(깜빡임)를 원천 차단
+    <Component
+      ref={scope}
+      style={{ visibility: isSplitReady ? undefined : 'hidden' }}
+      className={`relative block ${className}`}
+    >
       {/* \n 문자를 <br/>로 치환하여 split-type이 디자이너의 의도적인 강제 줄바꿈을 완벽히 인식하게 함 */}
       {children.split('\n').map((line, i, arr) => (
         <React.Fragment key={i}>

@@ -66,14 +66,6 @@ export default function Preloader() {
             </motion.p>
           </div>
 
-          <div className="absolute bottom-16 animate-pulse">
-            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 20 20" fill="none" className="animate-spin duration-1000">
-              <path 
-                d="M-4.37114e-07 10C-6.59372e-07 15.0847 4.02846 19.4286 9.00166 19.948C9.55096 20.0054 10 19.5523 10 19V19C10 18.4477 9.54999 18.0067 9.00237 17.935C5.11573 17.4265 2 13.9999 2 10C2 5.663 5.663 2 10 2C13.9999 2 17.4265 5.11573 17.935 9.00237C18.0067 9.54999 18.4477 10 19 10V10C19.5523 10 20.0054 9.55096 19.948 9.00166C19.4285 4.02846 15.0837 -2.14896e-07 10 -4.37114e-07C4.579 -6.74073e-07 -2.00154e-07 4.579 -4.37114e-07 10Z" 
-                fill="#FCFCFC" 
-              />
-            </svg>
-          </div>
         </motion.div>
       )}
     </AnimatePresence>

@@ -24,7 +24,7 @@ export default function AboutPage() {
           </span>
           <RevealText 
             as="h1" 
-            className="text-4xl sm:text-5xl md:text-6xl font-light tracking-tight leading-[0.9] text-[#111111]"
+            className="text-4xl sm:text-5xl md:text-6xl font-light tracking-tight leading-none text-[#111111]"
           >
             {"About our studio\n& creative vision"}
           </RevealText>
@@ -41,13 +41,13 @@ export default function AboutPage() {
             </span>
           </div>
           <div className="md:col-span-6 space-y-6">
-            <h2 className="text-xl md:text-2xl font-light tracking-wide text-[#111111]">
+            <RevealText as="h2" className="text-xl md:text-2xl font-light tracking-[-0.01em] leading-snug text-[#111111]">
               Harmony of space, human scale, and daylight
-            </h2>
-            <RevealText className="text-sm font-light leading-relaxed text-[#111111]/60">
+            </RevealText>
+            <RevealText delay={0.25} className="text-sm font-light leading-relaxed text-[#111111]/60">
               We focus on the essential meaning of dwelling. Rather than complex decorations, we combine smart space planning algorithms with physical structures to allow residents to dwell, work, and discover true inspiration.
             </RevealText>
-            <RevealText className="text-sm font-light leading-relaxed text-[#111111]/60">
+            <RevealText delay={0.4} className="text-sm font-light leading-relaxed text-[#111111]/60">
               In particular, we carefully analyze daylight flow and local light temperature to hide bulky lighting fixtures, embedding only the soft reflection of illumination into the geometric canvas. This lighting strategy is the defining signature of ZIBIS.
             </RevealText>
           </div>
@@ -75,7 +75,9 @@ export default function AboutPage() {
         {/* Team Section */}
         <div className="space-y-8">
           <div className="border-b border-[#111111]/10 pb-4">
-            <h3 className="text-lg md:text-xl font-light tracking-wide uppercase">Our People</h3>
+            <RevealText as="h3" className="text-lg md:text-xl font-light tracking-[-0.01em] uppercase">
+              Our People
+            </RevealText>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {team.map((member, idx) => (
