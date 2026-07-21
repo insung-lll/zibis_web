@@ -51,11 +51,11 @@ export const metadata: Metadata = {
     description: "지비스(ZIBIS)는 프리미엄 스마트 공간 및 조명 설계 건축 디자인 스튜디오입니다.",
   },
   robots: {
-    index: true,
-    follow: true,
+    index: false,
+    follow: false,
     googleBot: {
-      index: true,
-      follow: true,
+      index: false,
+      follow: false,
       "max-video-preview": -1,
       "max-image-preview": "large",
       "max-snippet": -1,
