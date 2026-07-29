@@ -1,8 +1,9 @@
 'use client';
 
 import { useRef } from 'react';
-import { useInView } from 'framer-motion';
+import { useInView, motion, useScroll, useTransform } from 'framer-motion';
 import Link from 'next/link';
+import Image from 'next/image';
 import RevealText from '@/components/RevealText';
 import ProjectCard from '@/components/ProjectCard';
 
@@ -12,6 +13,10 @@ export default function Home() {
   // CTA 타이틀 리빌 감지 (문단 리빌을 이 트리거에 이어붙여 스크롤 속도와 무관하게 간격을 고정)
   const ctaTitleRef = useRef<HTMLDivElement>(null);
   const ctaTitleInView = useInView(ctaTitleRef, { margin: "-8% 0px", once: true });
+
+  const { scrollY } = useScroll();
+  // 0에서 800px 스크롤하는 동안 투명도가 0.3에서 0.9로 진해짐
+  const overlayOpacity = useTransform(scrollY, [0, 800], [0.3, 0.9]);
 
   // Selected works data
   const projects = [
@@ -54,90 +59,142 @@ export default function Home() {
     <div ref={containerRef} className="relative w-full overflow-x-clip bg-[#F9F9F7]">
       {/* 1. Hero Section — sticky로 화면에 고정, 다음 섹션이 위로 올라와 덮는 스택 스크롤 */}
       <section
-        className="sticky top-0 z-0 h-screen w-full flex flex-col justify-end px-6 pb-20 md:px-12 md:pb-24 bg-[#EBEBE9] overflow-hidden"
+        className="sticky top-0 z-0 h-screen w-full flex flex-col justify-end px-6 pb-[60px] md:px-12 md:pb-[76px] bg-[#EBEBE9] overflow-hidden"
       >
-        {/* Geometric block overlay */}
-        <div className="absolute inset-0 grid grid-cols-12 gap-0 pointer-events-none opacity-40">
-          <div className="col-span-8 bg-[#E5E5E3] h-full" />
-          <div className="col-span-4 bg-[#DFDFDD] h-full" />
-        </div>
+        {/* Background Image & Overlay */}
+        <div className="absolute inset-0 bg-[url('/img/hero_2.jpg')] bg-cover bg-center" />
+        <motion.div 
+          className="absolute inset-0 bg-black pointer-events-none"
+          style={{ opacity: overlayOpacity }}
+        />
 
-        <div className="relative z-10 max-w-5xl space-y-6">
-          <span className="text-[10px] font-mono tracking-[0.25em] uppercase text-[#111111]/45 block">
-            (Architecture + Smart Space Design Studio)
-          </span>
+        {/* 중앙 그리드 레이아웃 (새로운 텍스트 요소들) */}
+        <div className="absolute inset-x-6 md:inset-x-12 top-[calc(50%+40px)] -translate-y-1/2 z-10 grid grid-cols-4 md:grid-cols-12 gap-4 pointer-events-none text-[#F9F9F7] items-start mt-12 md:mt-0">
+          {/* 1. Date */}
+          <div className="col-span-4 md:col-span-3 lg:col-span-2 text-[14px] font-sans tracking-widest uppercase">
+            2026.01.24
+          </div>
           
-          {/* upgraded reveal text */}
-          <RevealText 
-            as="h1" 
-            className="text-lg sm:text-3xl md:text-4xl font-light tracking-tight leading-none text-[#111111] max-w-5xl"
-          >
-            {"The ZIBIS style is defined by\nstrong, solid forms with subtle elegance,\nnatural balance and enduring appeal"}
-          </RevealText>
+          {/* 2. Tag */}
+          <div className="col-span-4 md:col-span-3 md:col-start-4 lg:col-start-5 lg:col-span-2 text-[14px] font-sans tracking-widest uppercase text-[#F9F9F7]/70">
+            @HOMELUDENCE
+          </div>
 
-          <div className="pt-4">
-            <span className="text-xs font-mono tracking-widest text-[#111111]/60 uppercase block">
-              Scroll down
-            </span>
+          {/* 3. Description */}
+          <div className="col-span-4 md:col-span-4 md:col-start-7 lg:col-start-8 lg:col-span-3 text-[12px] md:text-[14px] max-w-[280px] leading-[1.3] tracking-wider uppercase font-sans text-[#F9F9F7]/70 break-keep">
+            <p>
+              A FULL INTERIOR RENOVATION OF A 79㎡ APARTMENT, FINISHED ENTIRELY IN WHITE. ZIBIS IOT LIGHTING RUNS THROUGHOUT THE SPACE, QUIETLY SHIFTING WARMTH AND BRIGHTNESS TO MATCH THE RHYTHM OF THE DAY.
+            </p>
+            <p className="mt-2">
+              화이트 톤으로 정돈한 24평 아파트 인테리어. 군더더기 없는 공간에 지비스 IOT 조명을 적용해, 시간과 상황에 따라 빛의 온도와 밝기가 자연스럽게 바뀌는 집을 완성했습니다.
+            </p>
+          </div>
+
+          {/* 4. View Project */}
+          <div className="col-span-4 md:col-span-2 md:col-start-11 lg:col-start-11 lg:col-span-2 text-left md:text-right pointer-events-auto mt-2 md:mt-0 pt-0.5">
+            <Link href="/projects" className="group inline-flex items-center text-[14px] font-sans tracking-widest uppercase hover:text-[#F9F9F7] whitespace-nowrap">
+              <span className="relative pb-0.5">
+                VIEW PROJECT
+                <span className="absolute bottom-0 left-0 w-full h-[1px] bg-[#F9F9F7] origin-left scale-x-0 transition-transform duration-300 ease-out group-hover:scale-x-100" />
+              </span>
+              <span className="ml-2 text-[18px] relative -top-[2px] leading-none transition-transform duration-300 group-hover:translate-x-1">→</span>
+            </Link>
           </div>
         </div>
 
-        {/* View Project — 히어로 우측 하단, 대표 프로젝트로 이동 (oharchitecture 레퍼런스) */}
-        <Link
-          href="/projects"
-          className="absolute bottom-20 right-6 md:bottom-24 md:right-12 z-10 group bg-[#111111] border border-[#111111] rounded-full px-6 py-3 text-xs font-semibold tracking-widest uppercase text-[#F9F9F7] inline-flex items-center justify-center overflow-hidden"
-        >
-          <div className="relative z-10 h-[14px] overflow-hidden flex flex-col justify-start pointer-events-none select-none leading-[14px] text-center">
-            <span className="transition-transform duration-500 ease-[0.76,0,0.24,1] group-hover:-translate-y-full block text-[#F9F9F7]">
-              View Project
+        {/* 하단 텍스트 레이아웃 */}
+        <div className="relative z-10 w-full flex flex-col md:flex-row md:items-end justify-between">
+          <div className="space-y-4">
+            <span className="text-[10px] md:text-[14px] font-mono tracking-[0.25em] uppercase text-[#F9F9F7]/70 block">
+              (SMART LIGHTING — ZIBIS)
             </span>
-            <span className="transition-transform duration-500 ease-[0.76,0,0.24,1] group-hover:-translate-y-full block absolute top-full text-[#F9F9F7] left-0 right-0">
-              View Project
+            <RevealText 
+              as="h1" 
+              className="text-[26px] sm:text-[36px] md:text-[44px] font-light tracking-tight leading-none text-[#F9F9F7] max-w-5xl"
+            >
+              <span className="block pb-1">{"The Smart Home Partner,"}</span>
+              <span className="block"><span className="font-semibold">ZIBIS</span>{" Smart Lighting Solution."}</span>
+            </RevealText>
+          </div>
+
+          <div className="absolute left-1/2 bottom-0 transform -translate-x-1/2 hidden md:block mb-1">
+            <span className="text-[10px] md:text-[14px] font-mono tracking-[0.25em] text-[#F9F9F7]/70 uppercase">
+              SCROLL DOWN
             </span>
           </div>
-          <span className="relative z-10 ml-2 text-[#F9F9F7] pointer-events-none select-none leading-[14px]">→</span>
-        </Link>
+        </div>
       </section>
 
       {/* 2. Content Section (Stacking over hero) */}
       <section className="relative z-10 bg-[#F9F9F7] px-6 py-24 md:px-12 md:py-36 shadow-[0_-15px_30px_rgba(0,0,0,0.03)]">
         
-        {/* Studio Philosophy Section */}
-        <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12 mb-32">
-          <div className="lg:col-span-4">
-            <span className="text-[10px] font-mono tracking-widest uppercase text-[#111111]/40">
-              (Our Studio)
-            </span>
-          </div>
-          <div className="lg:col-span-8 space-y-8">
-            <RevealText 
-              as="h2" 
-              className="text-2xl md:text-3xl font-bold tracking-[-0.01em] leading-tight max-w-none text-[#111111]"
-            >
-              {"We design spaces for people.\nNo matter the scale of the projects,\nour down-to-earth approach stays the same."}
-            </RevealText>
-            <RevealText 
-              delay={0.4} 
-              className="text-sm font-light leading-relaxed text-[#111111] max-w-xl"
-            >
-              We listen first, design second. We take the time to understand how you live, work, and move through your space. Then, we bring your vision to life. Drawing from real experience, we create contemporary, aspirational spaces that feel effortless and truly yours.
-            </RevealText>
-            <div className="pt-4">
-              <Link
-                href="/about"
-                className="relative overflow-hidden group bg-[#036CC5] border border-[#036CC5] rounded-full px-6 py-3 text-xs font-semibold tracking-widest uppercase text-[#F9F9F7] inline-flex items-center justify-center min-w-[240px] z-10"
-              >
-                {/* 텍스트만 롤링되고 화살표는 고정되도록 분리 */}
-                <div className="relative z-10 h-[14px] overflow-hidden flex flex-col justify-start pointer-events-none select-none leading-[14px] text-center">
-                  <span className="transition-transform duration-500 ease-[0.76,0,0.24,1] group-hover:-translate-y-full block text-[#F9F9F7]">
-                    learn more about our studio
-                  </span>
-                  <span className="transition-transform duration-500 ease-[0.76,0,0.24,1] group-hover:-translate-y-full block absolute top-full text-[#F9F9F7] left-0 right-0">
-                    learn more about our studio
-                  </span>
+        {/* ZIBIS Story Section (Wide Layout) */}
+        <div className="w-full mb-32 md:mb-48">
+          {/* Huge Wide Title */}
+          <RevealText 
+            as="h2" 
+            className="text-[32px] md:text-[4vw] lg:text-[4vw] font-bold tracking-tight leading-[1.2] md:leading-[1.1] text-[#111111] mb-5 md:mb-8 break-keep relative -top-[30px] md:-top-[60px]"
+          >
+            진정한 스마트홈의 완성은,<br className="hidden md:block" />
+            공간이 시작될 때 설계되어야 합니다.
+          </RevealText>
+
+          {/* Content Layout (Images + Tag + Text) */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-x-4 gap-y-8 md:gap-y-8 lg:gap-y-10">
+            
+            {/* Top Row: Tag (Bottom Aligned) + Images */}
+            <div className="lg:col-span-3 flex flex-col justify-end hidden lg:flex">
+              <span className="text-[10px] md:text-[14px] font-mono tracking-widest uppercase text-[#111111]/40 block leading-none">
+                (Our Story)
+              </span>
+            </div>
+            
+            <div className="lg:col-span-9">
+              {/* Mobile Tag */}
+              <div className="lg:hidden mb-4">
+                <span className="text-[10px] md:text-[14px] font-mono tracking-widest uppercase text-[#111111]/40 block">
+                  (Our Story)
+                </span>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-3">
+                <div className="aspect-[16/10] w-full overflow-hidden relative">
+                  <Image src="/img/2_1_1.jpg" alt="Zibis story image 1" fill className="object-cover" />
                 </div>
-                <span className="relative z-10 ml-2 text-[#F9F9F7] pointer-events-none select-none leading-[14px]">→</span>
-              </Link>
+                <div className="aspect-[16/10] w-full overflow-hidden relative">
+                  <Image src="/img/2_2_2.svg" alt="Zibis story image 2" fill className="object-cover" />
+                </div>
+              </div>
+            </div>
+
+            {/* Bottom Row: Description */}
+            <div className="lg:col-span-9 lg:col-start-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-3">
+                <div className="space-y-10 lg:ml-2 w-full max-w-[640px]">
+                  <RevealText 
+                    delay={0.2} 
+                    className="text-[14px] md:text-[15px] font-medium leading-[1.4] text-[#111111] opacity-70 break-keep"
+                  >
+                    조명은 인테리어가 끝난 후 고르는 소품이 아닙니다. 벽과 천장의 배선이 이루어지는 가장 첫 단계에서 뼈대를 세워야 완벽한 스마트홈이 탄생합니다. 지비스는 혁신적인 2WIRE 배선 기술과 끊김 없는 무선 통신으로 재공사 없는 가장 확실한 스마트 조명 인프라를 제안합니다.
+                  </RevealText>
+                  
+                  <div className="pt-2">
+                    <Link
+                      href="/about"
+                      className="relative overflow-hidden group bg-[#036CC5] rounded-full px-6 py-3 text-[11px] font-semibold tracking-widest uppercase text-[#F9F9F7] inline-flex items-center justify-center z-10"
+                    >
+                      <div className="relative z-10 h-[14px] overflow-hidden flex flex-col justify-start pointer-events-none select-none leading-[14px] text-center">
+                        <span className="transition-transform duration-500 ease-[0.76,0,0.24,1] group-hover:-translate-y-full block text-[#F9F9F7]">
+                          learn more about zibis
+                        </span>
+                        <span className="transition-transform duration-500 ease-[0.76,0,0.24,1] group-hover:-translate-y-full block absolute top-full text-[#F9F9F7] left-0 right-0">
+                          learn more about zibis
+                        </span>
+                      </div>
+                      <span className="relative z-10 ml-2 text-[14px] relative -top-[1px] text-[#F9F9F7] pointer-events-none select-none leading-[14px]">→</span>
+                    </Link>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -170,7 +227,7 @@ export default function Home() {
 
         {/* CTA Section */}
         <div className="max-w-5xl mx-auto mt-36 text-center space-y-8 py-16 border-t border-[#111111]/10">
-          <span className="text-[10px] font-mono tracking-widest uppercase text-[#111111]/40 block">
+          <span className="text-[10px] md:text-[14px] font-mono tracking-widest uppercase text-[#111111]/40 block">
             (Get in touch)
           </span>
           

@@ -229,12 +229,14 @@ export default function RevealText({
       className={`relative block ${className}`}
     >
       {/* \n 문자를 <br/>로 치환하여 디자이너의 의도적인 강제 줄바꿈을 인식하게 함 */}
-      {children.split('\n').map((line, i, arr) => (
-        <React.Fragment key={i}>
-          {line}
-          {i !== arr.length - 1 && <br />}
-        </React.Fragment>
-      ))}
+      {typeof children === 'string'
+        ? children.split('\n').map((line, i, arr) => (
+            <React.Fragment key={i}>
+              {line}
+              {i !== arr.length - 1 && <br />}
+            </React.Fragment>
+          ))
+        : children}
     </Component>
   );
 }

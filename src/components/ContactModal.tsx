@@ -153,14 +153,13 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
             {/* 상단 닫기바 */}
             <div className="flex items-center justify-between border-b border-[#F9F9F7]/10 p-6">
               <span className="text-xs font-semibold tracking-widest text-[#F9F9F7]/50 uppercase">
-                (Contact Us)
+                상담 및 파트너십 문의
               </span>
               <button
                 onClick={handleClose}
                 className="group flex items-center space-x-2 text-xs font-semibold uppercase tracking-wider text-[#F9F9F7]/60 transition hover:text-[#F9F9F7]"
               >
-                <span>Close</span>
-                <X className="h-4 w-4 transition-transform group-hover:rotate-90" />
+                <X className="h-9 w-9 transition-transform group-hover:rotate-90" strokeWidth={1} />
               </button>
             </div>
 

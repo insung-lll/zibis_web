@@ -69,8 +69,8 @@ export default function MenuOverlay({ isOpen, onClose, onOpenContact }: MenuOver
     >
       {/* 헤더 부분 */}
       <header className="flex items-center justify-between w-full">
-        <Link href="/" onClick={onClose} className="text-xl font-light tracking-[0.15em] uppercase hover:opacity-80">
-          ZIBIS
+        <Link href="/" onClick={onClose} className="invisible select-none hover:opacity-80 transition-opacity">
+          <img src="/img/zibis_logo2.png" alt="ZIBIS" className="h-7 md:h-8 w-auto object-contain" />
         </Link>
         <div className="flex items-center space-x-6">
           <button
@@ -94,8 +94,7 @@ export default function MenuOverlay({ isOpen, onClose, onOpenContact }: MenuOver
             onClick={onClose} 
             className="group flex items-center space-x-2 text-xs font-semibold uppercase tracking-wider text-[#F9F9F7]/60 transition hover:text-[#F9F9F7]"
           >
-            <span>Close</span>
-            <X className="h-4 w-4 transition-transform group-hover:rotate-90" />
+            <X className="h-9 w-9 transition-transform group-hover:rotate-90" strokeWidth={1} />
           </button>
         </div>
       </header>
