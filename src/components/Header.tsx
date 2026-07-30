@@ -8,7 +8,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 const SCROLL_THRESHOLD = 50; // 스크롤 감지 기준값
 
 const NavLink = ({ href, children, isDarkText }: { href: string; children: React.ReactNode; isDarkText?: boolean }) => (
-  <Link href={href} className="relative overflow-hidden group py-1">
+  <Link href={href} className="relative block overflow-hidden group py-1">
     <div className="relative z-10 h-[14px] overflow-hidden flex flex-col justify-start pointer-events-none select-none leading-[14px]">
       <span className={`transition-all duration-500 ease-[0.76,0,0.24,1] group-hover:-translate-y-full block ${isDarkText ? 'text-[#111111]/70 group-hover:text-[#111111]' : 'text-[#FFF]/70 group-hover:text-[#FFF]'}`}>
         {children}

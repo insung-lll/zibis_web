@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { useInView, motion, useScroll, useTransform } from 'framer-motion';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -9,6 +9,7 @@ import ProjectCard from '@/components/ProjectCard';
 
 export default function Home() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [isHoveringProject, setIsHoveringProject] = useState(false);
 
   // CTA 타이틀 리빌 감지 (문단 리빌을 이 트리거에 이어붙여 스크롤 속도와 무관하게 간격을 고정)
   const ctaTitleRef = useRef<HTMLDivElement>(null);
@@ -25,32 +26,32 @@ export default function Home() {
       category: "Residential Architecture",
       year: "2025",
       colorClass: "bg-[#2A2B2D]",
-      span: "lg:col-span-8",
-      aspect: "aspect-[16/10]" as const
+      span: "lg:col-span-5",
+      aspect: "aspect-[4/5]" as const
     },
     {
-      title: "Ascot Studio",
-      category: "Commercial Office",
-      year: "2026",
+      title: "Sidney House",
+      category: "Residential Architecture",
+      year: "2025",
       colorClass: "bg-[#3D3A38]",
+      span: "lg:col-start-8 lg:col-span-5",
+      aspect: "aspect-[4/3]" as const
+    },
+    {
+      title: "Sidney House",
+      category: "Residential Architecture",
+      year: "2025",
+      colorClass: "bg-[#1E2124]",
       span: "lg:col-span-4",
       aspect: "aspect-[3/4]" as const
     },
     {
-      title: "Clayfield Renovation",
-      category: "Residential Renovation & Interior",
-      year: "2024",
-      colorClass: "bg-[#1E2124]",
-      span: "lg:col-span-5",
-      aspect: "aspect-square" as const
-    },
-    {
-      title: "Teneriffe Loft",
-      category: "Interior Design Only",
+      title: "Sidney House",
+      category: "Residential Architecture",
       year: "2025",
       colorClass: "bg-[#2F2E2C]",
-      span: "lg:col-span-7",
-      aspect: "aspect-[16/10]" as const
+      span: "lg:col-start-6 lg:col-span-7",
+      aspect: "aspect-[4/5]" as const
     }
   ];
 
@@ -62,7 +63,21 @@ export default function Home() {
         className="sticky top-0 z-0 h-screen w-full flex flex-col justify-end px-6 pb-[60px] md:px-12 md:pb-[76px] bg-[#EBEBE9] overflow-hidden"
       >
         {/* Background Image & Overlay */}
-        <div className="absolute inset-0 bg-[url('/img/hero_2.jpg')] bg-cover bg-center" />
+        <div className="absolute inset-0 overflow-hidden">
+          {/* 기본 배경 */}
+          <div 
+            className={`absolute inset-0 bg-[url('/img/hero_2.jpg')] bg-cover bg-center transition-transform duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+              isHoveringProject ? '-translate-x-[10%]' : 'translate-x-0'
+            }`} 
+          />
+          
+          {/* 호버 시 우측에서 슬라이드 인 되는 프로젝트 배경 (더미 이미지) */}
+          <div 
+            className={`absolute inset-0 bg-[url('/img/2_1.jpg')] bg-cover bg-center transition-transform duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+              isHoveringProject ? 'translate-x-0' : 'translate-x-[100%]'
+            }`}
+          />
+        </div>
         <motion.div 
           className="absolute inset-0 bg-black pointer-events-none"
           style={{ opacity: overlayOpacity }}
@@ -92,12 +107,17 @@ export default function Home() {
 
           {/* 4. View Project */}
           <div className="col-span-4 md:col-span-2 md:col-start-11 lg:col-start-11 lg:col-span-2 text-left md:text-right pointer-events-auto mt-2 md:mt-0 pt-0.5">
-            <Link href="/projects" className="group inline-flex items-center text-[14px] font-sans tracking-widest uppercase hover:text-[#F9F9F7] whitespace-nowrap">
-              <span className="relative pb-0.5">
+            <Link 
+              href="/projects" 
+              onMouseEnter={() => setIsHoveringProject(true)}
+              onMouseLeave={() => setIsHoveringProject(false)}
+              className="group inline-flex items-center text-[14px] font-sans tracking-widest uppercase hover:text-[#F9F9F7] whitespace-nowrap"
+            >
+              <span className="relative pb-0.5 z-10">
                 VIEW PROJECT
                 <span className="absolute bottom-0 left-0 w-full h-[1px] bg-[#F9F9F7] origin-left scale-x-0 transition-transform duration-300 ease-out group-hover:scale-x-100" />
               </span>
-              <span className="ml-2 text-[18px] relative -top-[2px] leading-none transition-transform duration-300 group-hover:translate-x-1">→</span>
+              <span className="ml-2 text-[18px] relative -top-[2px] z-10 leading-none transition-transform duration-300 group-hover:translate-x-1">→</span>
             </Link>
           </div>
         </div>
@@ -200,17 +220,17 @@ export default function Home() {
         </div>
 
         {/* Selected Works Grid */}
-        <div className="max-w-7xl mx-auto space-y-12">
-          <div className="flex justify-between items-end border-b border-[#111111]/10 pb-6 mb-12">
-            <RevealText as="h3" className="text-xl md:text-3xl font-light tracking-[-0.01em] leading-snug uppercase">
-              Featured Works
+        <div className="w-full px-6 md:px-12 pt-24 pb-36">
+          <div className="flex justify-between items-center md:items-end pb-4 mb-16 md:mb-24">
+            <RevealText as="h3" className="text-[46px] md:text-[90px] font-medium tracking-tight uppercase text-[#111111] leading-none">
+              PROJECTS
             </RevealText>
-            <Link href="/projects" className="text-xs font-semibold tracking-widest uppercase text-[#111111]/60 hover:text-[#111111] transition">
-              view all works (4)
+            <Link href="/projects" className="text-[10px] md:text-xs font-semibold tracking-widest uppercase text-[#111111]/40 hover:text-[#111111] transition mb-0 md:mb-4">
+              VIEW ALL PROJECTS (4)
             </Link>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-x-8 gap-y-60">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-x-6 gap-y-24 md:gap-y-32 items-start">
             {projects.map((project, idx) => (
               <div key={idx} className={`${project.span}`}>
                 <ProjectCard
