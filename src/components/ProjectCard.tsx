@@ -7,7 +7,7 @@ interface ProjectCardProps {
   category: string;
   year: string;
   colorClass?: string;
-  aspect?: 'aspect-[4/3]' | 'aspect-[3/4]' | 'aspect-video' | 'aspect-square' | 'aspect-[16/10]';
+  aspect?: 'aspect-[4/5]' | 'aspect-[4/3]' | 'aspect-[3/4]' | 'aspect-video' | 'aspect-square' | 'aspect-[16/10]';
 }
 
 export default function ProjectCard({ 

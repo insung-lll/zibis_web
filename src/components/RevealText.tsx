@@ -5,7 +5,7 @@ import { useInView, useAnimate } from 'framer-motion';
 import React from 'react';
 
 interface RevealTextProps {
-  children: string;
+  children: React.ReactNode;
   className?: string;
   delay?: number;
   once?: boolean;
