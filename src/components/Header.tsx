@@ -34,7 +34,7 @@ export default function Header({ onOpenMenu, onOpenContact }: HeaderProps) {
 
   // 모바일 여부 감지: 모바일에서는 내비게이션이 숨겨지므로 메뉴 버튼을 항상 노출해야 함
   useEffect(() => {
-    const mql = window.matchMedia('(max-width: 767px)');
+    const mql = window.matchMedia('(max-width: 1023px)');
     const updateIsMobile = () => setIsMobile(mql.matches);
     updateIsMobile();
     mql.addEventListener('change', updateIsMobile);
@@ -76,7 +76,7 @@ export default function Header({ onOpenMenu, onOpenContact }: HeaderProps) {
         </div>
 
         {/* 중앙 영역 (화면 기준 절대 정중앙 배치) */}
-        <nav className="hidden md:flex absolute left-1/2 transform -translate-x-1/2 items-center space-x-4 text-sm font-bold tracking-widest uppercase">
+        <nav className="hidden lg:flex absolute left-1/2 transform -translate-x-1/2 items-center space-x-4 text-sm font-bold tracking-widest uppercase whitespace-nowrap">
           <NavLink href="/projects" isDarkText={isDarkText}>Projects</NavLink>
           <span className={`w-[3px] h-[3px] rounded-full shrink-0 ${isDarkText ? 'bg-[#111111]/40' : 'bg-[#FFF]/40'}`} />
           <NavLink href="/about" isDarkText={isDarkText}>About</NavLink>
@@ -90,8 +90,8 @@ export default function Header({ onOpenMenu, onOpenContact }: HeaderProps) {
           <NavLink href="/resources" isDarkText={isDarkText}>Resources</NavLink>
         </nav>
 
-        {/* 우측 영역 (상담 버튼) : 모바일에서는 플로팅 버튼이 항상 대신 노출되므로 데스크톱 전용 */}
-        <div className="flex-1 hidden md:flex justify-end items-center">
+        {/* 우측 영역 (상담 버튼) : 모바일/태블릿에서는 플로팅 버튼이 항상 대신 노출되므로 데스크톱 전용 */}
+        <div className="flex-1 hidden lg:flex justify-end items-center">
           {/* CONTACT US (기본 블랙 버튼, 텍스트 롤링, 동그라미 표식) */}
           <button
             onClick={onOpenContact}
