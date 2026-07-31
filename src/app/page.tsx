@@ -63,18 +63,18 @@ export default function Home() {
         className="sticky top-0 z-0 h-screen w-full flex flex-col justify-end px-6 pb-[60px] md:px-12 md:pb-[76px] bg-[#EBEBE9] overflow-hidden"
       >
         {/* Background Image & Overlay */}
-        <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute inset-0 overflow-hidden bg-[#111111]">
           {/* 기본 배경 */}
           <div 
-            className={`absolute inset-0 bg-[url('/img/hero_2.jpg')] bg-cover bg-center transition-transform duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] ${
-              isHoveringProject ? '-translate-x-[10%]' : 'translate-x-0'
+            className={`absolute inset-0 bg-[url('/img/hero_2.jpg')] bg-cover bg-center transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] origin-center ${
+              isHoveringProject ? '-translate-y-[5%] scale-90 opacity-50' : 'translate-y-0 scale-100 opacity-100'
             }`} 
           />
           
-          {/* 호버 시 우측에서 슬라이드 인 되는 프로젝트 배경 (더미 이미지) */}
+          {/* 호버 시 아래에서 위로 슬라이드 인 되는 프로젝트 배경 (더미 이미지) */}
           <div 
             className={`absolute inset-0 bg-[url('/img/2_1.jpg')] bg-cover bg-center transition-transform duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] ${
-              isHoveringProject ? 'translate-x-0' : 'translate-x-[100%]'
+              isHoveringProject ? 'translate-y-0' : 'translate-y-[100%]'
             }`}
           />
         </div>
