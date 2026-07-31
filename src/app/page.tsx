@@ -26,7 +26,7 @@ export default function Home() {
       category: "Residential Architecture",
       year: "2025",
       colorClass: "bg-[#2A2B2D]",
-      span: "xl:col-span-5",
+      span: "xl:col-span-5 w-full min-w-[100%] xl:min-w-[460px] justify-self-start",
       aspect: "aspect-[4/5]" as const
     },
     {
@@ -34,7 +34,7 @@ export default function Home() {
       category: "Residential Architecture",
       year: "2025",
       colorClass: "bg-[#3D3A38]",
-      span: "xl:col-start-8 xl:col-span-5",
+      span: "xl:col-start-8 xl:col-span-5 w-full min-w-[100%] xl:min-w-[460px] justify-self-end",
       aspect: "aspect-[4/3]" as const
     },
     {
@@ -42,7 +42,7 @@ export default function Home() {
       category: "Residential Architecture",
       year: "2025",
       colorClass: "bg-[#1E2124]",
-      span: "xl:col-span-4",
+      span: "xl:col-span-4 w-full min-w-[100%] xl:min-w-[380px] justify-self-start",
       aspect: "aspect-[3/4]" as const
     },
     {
@@ -50,7 +50,7 @@ export default function Home() {
       category: "Residential Architecture",
       year: "2025",
       colorClass: "bg-[#2F2E2C]",
-      span: "xl:col-start-6 xl:col-span-7",
+      span: "xl:col-start-6 xl:col-span-7 w-full min-w-[100%] xl:min-w-[640px] justify-self-end",
       aspect: "aspect-[4/5]" as const
     }
   ];
