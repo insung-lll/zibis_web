@@ -33,6 +33,9 @@ export default function ProjectCard({
             ZIBIS
           </span>
         </div>
+        
+        {/* 다크 오버레이 호버 효과 */}
+        <div className="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
       </div>
       
       {/* 텍스트 설명 정보 */}

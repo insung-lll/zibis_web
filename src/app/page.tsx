@@ -26,7 +26,7 @@ export default function Home() {
       category: "Residential Architecture",
       year: "2025",
       colorClass: "bg-[#2A2B2D]",
-      span: "lg:col-span-5",
+      span: "xl:col-span-5",
       aspect: "aspect-[4/5]" as const
     },
     {
@@ -34,7 +34,7 @@ export default function Home() {
       category: "Residential Architecture",
       year: "2025",
       colorClass: "bg-[#3D3A38]",
-      span: "lg:col-start-8 lg:col-span-5",
+      span: "xl:col-start-8 xl:col-span-5",
       aspect: "aspect-[4/3]" as const
     },
     {
@@ -42,7 +42,7 @@ export default function Home() {
       category: "Residential Architecture",
       year: "2025",
       colorClass: "bg-[#1E2124]",
-      span: "lg:col-span-4",
+      span: "xl:col-span-4",
       aspect: "aspect-[3/4]" as const
     },
     {
@@ -50,7 +50,7 @@ export default function Home() {
       category: "Residential Architecture",
       year: "2025",
       colorClass: "bg-[#2F2E2C]",
-      span: "lg:col-start-6 lg:col-span-7",
+      span: "xl:col-start-6 xl:col-span-7",
       aspect: "aspect-[4/5]" as const
     }
   ];
@@ -230,7 +230,7 @@ export default function Home() {
             </Link>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-x-6 gap-y-24 md:gap-y-32 items-start">
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-12 gap-x-6 gap-y-16 xl:gap-y-32 items-start">
             {projects.map((project, idx) => (
               <div key={idx} className={`${project.span}`}>
                 <ProjectCard
