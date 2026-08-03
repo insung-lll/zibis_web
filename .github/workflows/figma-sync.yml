@@ -1,0 +1,39 @@
+name: 🎨 Figma Variables Sync
+
+on:
+  schedule:
+    - cron: '0 0 * * *' # 매일 아침 9시 (KST)
+  workflow_dispatch: # GitHub Actions 웹에서 수동 실행 버튼 제공
+
+jobs:
+  sync:
+    name: Sync Figma Variables to tokens.css
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-size: '20'
+
+      - name: Run Figma Token Sync
+        run: node scripts/sync-figma-tokens.mjs
+        env:
+          FIGMA_TOKEN: ${{ secrets.FIGMA_TOKEN }}
+
+      - name: Create Pull Request on Changes
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: 'style: update Figma design tokens'
+          title: '🎨 Figma 디자인 토큰 변경사항 반영'
+          body: |
+            ## 🎨 Figma 디자인 변수 자동 변경 알림
+            피그마(Figma) 디자인 파일에서 최신 변수(Variables) 변경 사항을 감지하여 `src/app/tokens.css` 코드로 자동 동기화했습니다.
+            
+            - 변경 사항을 검토(Diff)하신 후 **[Merge]**를 누르면 라이브 서비스에 반영됩니다.
+          branch: figma-token-sync
+          delete-branch: true
