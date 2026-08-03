@@ -218,7 +218,7 @@ export default function Home() {
 
         {/* Selected Works Grid */}
         <div className="w-full px-6 md:px-12 pt-12 pb-36">
-          <div className="flex justify-between items-center md:items-end pb-4 mb-16 md:mb-24">
+          <div className="flex justify-between items-center md:items-end pb-4 mb-8 md:mb-12">
             <RevealText as="h3" className="text-[46px] md:text-[90px] font-medium tracking-tight uppercase text-[#111111] leading-none">
               PROJECTS
             </RevealText>
