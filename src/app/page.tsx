@@ -182,7 +182,7 @@ export default function Home() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, amount: 0.2 }}
                     transition={{ duration: 1.2, ease: [0.19, 1, 0.22, 1], delay: 0.2 }}
-                    className="text-[16px] md:text-[18px] font-medium leading-[1.6] text-[#111111] opacity-70"
+                    className="text-[16px] md:text-[18px] font-normal leading-[1.6] text-[#111111] opacity-70 break-keep"
                   >
                     조명은 인테리어가 끝난 후 고르는 소품이 아닙니다. 벽과 천장의 배선이 이루어지는 가장 첫 단계에서 뼈대를 세워야 완벽한 스마트홈이 탄생합니다. 지비스는 혁신적인 2WIRE 배선 기술과 끊김 없는 무선 통신으로 재공사 없는 가장 확실한 스마트 조명 인프라를 제안합니다.
                   </motion.p>
