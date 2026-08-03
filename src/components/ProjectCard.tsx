@@ -93,12 +93,21 @@ export default function ProjectCard({
         
         {/* VIEW PROJECT 텍스트 버튼 (이미지 포함 전체 카드 호버 시 밑줄 및 화살표 애니메이션 동작) */}
         <div className="pt-0.5">
-          <div className="inline-flex items-center text-[10px] md:text-xs font-mono font-semibold tracking-widest uppercase text-[#111111]/60 whitespace-nowrap transition-colors duration-300 group-hover:text-[#111111]">
+          <div className="inline-flex items-center text-[14px] md:text-[16px] font-mono font-semibold tracking-widest uppercase text-[#858584] whitespace-nowrap">
             <span className="relative pb-0.5 z-10">
               VIEW PROJECT
-              <span className="absolute bottom-0 left-0 w-full h-[1px] bg-[#111111] origin-left scale-x-0 transition-transform duration-300 ease-out group-hover:scale-x-100" />
+              <span className="absolute bottom-0 left-0 w-full h-[1px] bg-[#858584] origin-left scale-x-0 transition-transform duration-300 ease-out group-hover:scale-x-100" />
             </span>
-            <span className="ml-1.5 md:ml-2 text-[12px] md:text-[14px] relative -top-[1px] z-10 leading-none transition-transform duration-300 group-hover:translate-x-1">→</span>
+            <svg 
+              width="24" 
+              height="10" 
+              viewBox="0 0 24 10" 
+              fill="none" 
+              xmlns="http://www.w3.org/2000/svg" 
+              className="ml-2 relative -top-[1px] z-10 transition-transform duration-300 group-hover:translate-x-1"
+            >
+              <path d="M0 5H23M23 5L19 1M23 5L19 9" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
           </div>
         </div>
       </motion.div>
