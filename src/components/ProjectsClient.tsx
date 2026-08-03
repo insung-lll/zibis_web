@@ -103,48 +103,48 @@ export default function ProjectsClient() {
       imageSrc: "/img/projects/homeludence_1.jpg",
       hoverImageSrc: "/img/projects/homeludence_2.jpg",
       colorClass: "bg-[#2A2B2D]",
-      aspect: "aspect-[4/5]" as const,
-      width: "w-[22vw] min-w-[320px] max-w-[400px]"
+      aspect: "aspect-[3/4]" as const,
+      width: "w-[18vw] min-w-[250px] max-w-[300px]"
     },
     {
       title: "PROJECT 02",
       category: "UPCOMING PROJECT",
       year: "2026",
       colorClass: "bg-[#3D3A38]",
-      aspect: "aspect-[3/4]" as const,
-      width: "w-[17.5vw] min-w-[240px] max-w-[290px]"
+      aspect: "aspect-[4/3]" as const,
+      width: "w-[24vw] min-w-[330px] max-w-[410px]"
     },
     {
       title: "PROJECT 03",
       category: "UPCOMING PROJECT",
       year: "2026",
       colorClass: "bg-[#1E2124]",
-      aspect: "aspect-[16/10]" as const,
-      width: "w-[26vw] min-w-[350px] max-w-[440px]"
+      aspect: "aspect-[3/4]" as const,
+      width: "w-[18vw] min-w-[250px] max-w-[300px]"
     },
     {
       title: "PROJECT 04",
       category: "UPCOMING PROJECT",
       year: "2026",
       colorClass: "bg-[#2F2E2C]",
-      aspect: "aspect-[4/5]" as const,
-      width: "w-[19vw] min-w-[260px] max-w-[310px]"
+      aspect: "aspect-[16/10]" as const,
+      width: "w-[26vw] min-w-[360px] max-w-[440px]"
     },
     {
       title: "PROJECT 05",
       category: "UPCOMING PROJECT",
       year: "2026",
       colorClass: "bg-[#2E3135]",
-      aspect: "aspect-[4/3]" as const,
-      width: "w-[21vw] min-w-[290px] max-w-[360px]"
+      aspect: "aspect-[3/4]" as const,
+      width: "w-[18vw] min-w-[250px] max-w-[300px]"
     },
     {
       title: "PROJECT 06",
       category: "UPCOMING PROJECT",
       year: "2026",
       colorClass: "bg-[#232426]",
-      aspect: "aspect-[3/4]" as const,
-      width: "w-[17.5vw] min-w-[240px] max-w-[290px]"
+      aspect: "aspect-[4/3]" as const,
+      width: "w-[24vw] min-w-[330px] max-w-[410px]"
     }
   ];
 
