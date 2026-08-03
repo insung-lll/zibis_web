@@ -6,6 +6,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import RevealText from '@/components/RevealText';
 import ProjectCard from '@/components/ProjectCard';
+import { projects as allProjects } from '@/data/projects';
 
 export default function Home() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -19,48 +20,33 @@ export default function Home() {
   // 0에서 800px 스크롤하는 동안 투명도가 0.3에서 0.9로 진해짐
   const overlayOpacity = useTransform(scrollY, [0, 800], [0.3, 0.9]);
 
-  // Selected works data
-  const projects = [
-    {
-      title: "신촌 아이파크",
-      category: "@HOMELUDENCE",
-      year: "2026",
-      imageSrc: "/img/projects/homeludence_1.jpg",
-      hoverImageSrc: "/img/projects/homeludence_2.jpg",
-      colorClass: "bg-[#2A2B2D]",
-      span: "xl:col-span-5 w-full min-w-[100%] xl:min-w-[460px] justify-self-start",
-      aspect: "aspect-[4/5]" as const
-    },
-    {
-      title: "PROJECT 02",
-      category: "UPCOMING PROJECT",
-      year: "2026",
-      colorClass: "bg-[#3D3A38]",
-      span: "xl:col-start-7 xl:col-span-6 w-full min-w-[100%] xl:min-w-[460px] justify-self-end",
-      aspect: "aspect-[4/3]" as const
-    },
-    {
-      title: "PROJECT 03",
-      category: "UPCOMING PROJECT",
-      year: "2026",
-      colorClass: "bg-[#2F2E2C]",
-      span: "xl:col-span-7 w-full min-w-[100%] xl:min-w-[640px] justify-self-start",
-      aspect: "aspect-[16/10]" as const
-    },
-    {
-      title: "PROJECT 04",
-      category: "UPCOMING PROJECT",
-      year: "2026",
-      colorClass: "bg-[#1E2124]",
-      span: "xl:col-start-9 xl:col-span-4 w-full min-w-[100%] xl:min-w-[380px] justify-self-end",
-      aspect: "aspect-[3/4]" as const
-    }
+  // 중앙 집중 데이터에서 정보 가져오기
+  const latestProject = allProjects[0];
+  
+  // 홈페이지 그리드 레이아웃 스펙 (하드코딩된 레이아웃 틀에 데이터만 매핑)
+  const gridSpans = [
+    { span: "xl:col-span-5 w-full min-w-[100%] xl:min-w-[460px] justify-self-start", aspect: "aspect-[4/5]" as const },
+    { span: "xl:col-start-7 xl:col-span-6 w-full min-w-[100%] xl:min-w-[460px] justify-self-end", aspect: "aspect-[4/3]" as const },
+    { span: "xl:col-span-7 w-full min-w-[100%] xl:min-w-[640px] justify-self-start", aspect: "aspect-[16/10]" as const },
+    { span: "xl:col-start-9 xl:col-span-4 w-full min-w-[100%] xl:min-w-[380px] justify-self-end", aspect: "aspect-[3/4]" as const }
   ];
+
+  const homeProjects = allProjects.slice(0, 4).map((p, i) => ({
+    id: p.id,
+    title: p.title,
+    category: p.partner,
+    year: p.year,
+    imageSrc: p.hoverImageSrc || p.heroImage,
+    hoverImageSrc: p.hoverImageSrc,
+    colorClass: p.colorClass,
+    span: gridSpans[i % gridSpans.length].span,
+    aspect: gridSpans[i % gridSpans.length].aspect
+  }));
 
   return (
     // overflow-hidden은 sticky를 무력화하므로 가로 넘침만 잘라내는 overflow-x-clip 사용
     <div ref={containerRef} className="relative w-full overflow-x-clip bg-[#F9F9F7]">
-      {/* 1. Hero Section — sticky로 화면에 고정, 다음 섹션이 위로 올라와 덮는 스택 스크롤 */}
+      {/* 1. Hero Section (sticky) */}
       <section
         className="sticky top-0 z-0 h-screen w-full flex flex-col justify-end px-6 pb-[60px] md:px-12 md:pb-[76px] bg-[#EBEBE9] overflow-hidden"
       >
@@ -68,16 +54,18 @@ export default function Home() {
         <div className="absolute inset-0 overflow-hidden bg-[#111111]">
           {/* 기본 배경 */}
           <div 
-            className={`absolute inset-0 bg-[url('/img/hero_2.jpg')] bg-cover bg-center transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] origin-center ${
+            className={`absolute inset-0 bg-cover bg-center transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] origin-center ${
               isHoveringProject ? '-translate-y-[5%] scale-90 opacity-50' : 'translate-y-0 scale-100 opacity-100'
             }`} 
+            style={{ backgroundImage: `url(${latestProject.heroImage})` }}
           />
           
           {/* 호버 시 아래에서 위로 슬라이드 인 되는 프로젝트 배경 */}
           <div 
-            className={`absolute inset-0 bg-[url('/img/projects/homeludence_2.jpg')] bg-cover bg-center transition-transform duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+            className={`absolute inset-0 bg-cover bg-center transition-transform duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] ${
               isHoveringProject ? 'translate-y-0' : 'translate-y-[100%]'
             }`}
+            style={{ backgroundImage: `url(${latestProject.hoverImageSrc || latestProject.heroImage})` }}
           />
         </div>
         <motion.div 
@@ -230,17 +218,19 @@ export default function Home() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-12 gap-x-6 gap-y-16 xl:gap-y-52 items-start">
-            {projects.map((project, idx) => (
-              <div key={idx} className={`${project.span}`}>
-                <ProjectCard
-                  title={project.title}
-                  category={project.category}
-                  year={project.year}
-                  imageSrc={project.imageSrc}
-                  hoverImageSrc={project.hoverImageSrc}
-                  colorClass={project.colorClass}
-                  aspect={project.aspect}
-                />
+            {homeProjects.map((project, idx) => (
+              <div key={project.id || idx} className={`${project.span}`}>
+                <Link href={`/projects/${project.id}`} className="block w-full">
+                  <ProjectCard
+                    title={project.title}
+                    category={project.category}
+                    year={project.year}
+                    imageSrc={project.imageSrc}
+                    hoverImageSrc={project.hoverImageSrc}
+                    colorClass={project.colorClass}
+                    aspect={project.aspect}
+                  />
+                </Link>
               </div>
             ))}
           </div>

@@ -5,6 +5,7 @@ import { motion, useMotionValue, animate } from 'framer-motion';
 import RevealText from '@/components/RevealText';
 import ProjectCard from '@/components/ProjectCard';
 import Link from 'next/link';
+import { projects } from '@/data/projects';
 
 // 러버밴드(고무줄) 오버스크롤 튜닝값 — iOS 스타일: 당길수록 저항이 점점 세져서 MAX값엔 점근만 함(벽에 부딪히지 않음)
 const RUBBER_BAND_MAX = 70; // 시각적으로 당겨지는 최대 픽셀
@@ -96,58 +97,18 @@ export default function ProjectsClient() {
     };
   }, [overscrollX]);
 
-  const allProjects = [
-    {
-      title: "신촌 아이파크",
-      category: "@HOMELUDENCE",
-      year: "2026",
-      imageSrc: "/img/projects/homeludence_1.jpg",
-      hoverImageSrc: "/img/projects/homeludence_2.jpg",
-      colorClass: "bg-[#2A2B2D]",
-      aspect: "aspect-[3/4]" as const,
-      width: "w-[18vw] min-w-[250px] max-w-[300px]"
-    },
-    {
-      title: "PROJECT 02",
-      category: "UPCOMING PROJECT",
-      year: "2026",
-      colorClass: "bg-[#3D3A38]",
-      aspect: "aspect-[16/10]" as const,
-      width: "w-[26vw] min-w-[360px] max-w-[440px]"
-    },
-    {
-      title: "PROJECT 03",
-      category: "UPCOMING PROJECT",
-      year: "2026",
-      colorClass: "bg-[#1E2124]",
-      aspect: "aspect-[3/4]" as const,
-      width: "w-[18vw] min-w-[250px] max-w-[300px]"
-    },
-    {
-      title: "PROJECT 04",
-      category: "UPCOMING PROJECT",
-      year: "2026",
-      colorClass: "bg-[#2F2E2C]",
-      aspect: "aspect-[16/10]" as const,
-      width: "w-[26vw] min-w-[360px] max-w-[440px]"
-    },
-    {
-      title: "PROJECT 05",
-      category: "UPCOMING PROJECT",
-      year: "2026",
-      colorClass: "bg-[#2E3135]",
-      aspect: "aspect-[3/4]" as const,
-      width: "w-[18vw] min-w-[250px] max-w-[300px]"
-    },
-    {
-      title: "PROJECT 06",
-      category: "UPCOMING PROJECT",
-      year: "2026",
-      colorClass: "bg-[#232426]",
-      aspect: "aspect-[16/10]" as const,
-      width: "w-[26vw] min-w-[360px] max-w-[440px]"
-    }
-  ];
+  // 중앙화된 프로젝트 데이터 허브 연동
+  const allProjects = projects.map(p => ({
+    id: p.id,
+    title: p.title,
+    category: p.partner,
+    year: p.year,
+    imageSrc: p.hoverImageSrc || p.heroImage,
+    hoverImageSrc: p.hoverImageSrc,
+    colorClass: p.colorClass,
+    aspect: p.aspect,
+    width: p.width
+  }));
 
   return (
     <>
@@ -165,10 +126,10 @@ export default function ProjectsClient() {
           <motion.div style={{ x: overscrollX }} className="flex items-end space-x-6 pl-12 md:pl-24 pr-5 h-[60vh] w-max">
             {allProjects.map((project, idx) => (
               <div
-                key={idx}
+                key={project.id || idx}
                 className={`flex-shrink-0 ${project.width}`}
               >
-                <Link href={`/projects/${idx + 1}`} className="block w-full">
+                <Link href={`/projects/${project.id}`} className="block w-full">
                   <ProjectCard
                     title={project.title}
                     category={project.category}
@@ -214,8 +175,8 @@ export default function ProjectsClient() {
 
         <div className="flex flex-col space-y-14">
           {allProjects.map((project, idx) => (
-            <div key={idx} className="w-full">
-              <Link href={`/projects/${idx + 1}`} className="block w-full">
+            <div key={project.id || idx} className="w-full">
+              <Link href={`/projects/${project.id}`} className="block w-full">
                 <ProjectCard
                   title={project.title}
                   category={project.category}
