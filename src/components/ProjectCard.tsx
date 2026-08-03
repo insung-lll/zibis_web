@@ -99,14 +99,14 @@ export default function ProjectCard({
               <span className="absolute bottom-0 left-0 w-full h-[1px] bg-[#858584] origin-left scale-x-0 transition-transform duration-300 ease-out group-hover:scale-x-100" />
             </span>
             <svg 
-              width="24" 
-              height="10" 
-              viewBox="0 0 24 10" 
+              width="18" 
+              height="8" 
+              viewBox="0 0 18 8" 
               fill="none" 
               xmlns="http://www.w3.org/2000/svg" 
-              className="ml-2 relative -top-[1px] z-10 transition-transform duration-300 group-hover:translate-x-1"
+              className="ml-1.5 md:ml-2 relative -top-[1px] z-10 transition-transform duration-300 group-hover:translate-x-1"
             >
-              <path d="M0 5H23M23 5L19 1M23 5L19 9" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round"/>
+              <path d="M0 4H17M17 4L14 1M17 4L14 7" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
           </div>
         </div>
