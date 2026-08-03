@@ -149,7 +149,7 @@ export default function Home() {
       <section className="relative z-10 bg-[#F9F9F7] px-6 py-24 md:px-12 md:py-36 shadow-[0_-15px_30px_rgba(0,0,0,0.03)]">
         
         {/* ZIBIS Story Section (Wide Layout) */}
-        <div className="w-full mb-32 md:mb-48">
+        <div className="w-full mb-16 md:mb-24">
           {/* Huge Wide Title */}
           <h2 className="text-[32px] md:text-[4vw] lg:text-[4vw] font-bold tracking-tight leading-[1.2] md:leading-[1.1] text-[#111111] mb-5 md:mb-8 break-keep relative -top-[30px] md:-top-[60px]">
             진정한 스마트홈의 완성은,<br className="hidden md:block" />
@@ -217,7 +217,7 @@ export default function Home() {
         </div>
 
         {/* Selected Works Grid */}
-        <div className="w-full px-6 md:px-12 pt-24 pb-36">
+        <div className="w-full px-6 md:px-12 pt-12 pb-36">
           <div className="flex justify-between items-center md:items-end pb-4 mb-16 md:mb-24">
             <RevealText as="h3" className="text-[46px] md:text-[90px] font-medium tracking-tight uppercase text-[#111111] leading-none">
               PROJECTS
