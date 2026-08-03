@@ -176,7 +176,7 @@ export default function Home() {
             {/* Bottom Row: Description */}
             <div className="lg:col-span-9 lg:col-start-4">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-3">
-                <div className="space-y-10 lg:ml-2 w-full">
+                <div className="space-y-10 w-full">
                   <motion.p 
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
