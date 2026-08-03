@@ -4,6 +4,7 @@ import { useRef, useState, useEffect } from 'react';
 import { motion, useMotionValue, animate } from 'framer-motion';
 import RevealText from '@/components/RevealText';
 import ProjectCard from '@/components/ProjectCard';
+import Link from 'next/link';
 
 // 러버밴드(고무줄) 오버스크롤 튜닝값 — iOS 스타일: 당길수록 저항이 점점 세져서 MAX값엔 점근만 함(벽에 부딪히지 않음)
 const RUBBER_BAND_MAX = 70; // 시각적으로 당겨지는 최대 픽셀
@@ -167,16 +168,18 @@ export default function ProjectsClient() {
                 key={idx}
                 className={`flex-shrink-0 ${project.width}`}
               >
-                <ProjectCard
-                  title={project.title}
-                  category={project.category}
-                  year={project.year}
-                  imageSrc={project.imageSrc}
-                  hoverImageSrc={project.hoverImageSrc}
-                  disableHoverSlide={true}
-                  colorClass={project.colorClass}
-                  aspect={project.aspect}
-                />
+                <Link href={`/projects/${idx + 1}`} className="block w-full">
+                  <ProjectCard
+                    title={project.title}
+                    category={project.category}
+                    year={project.year}
+                    imageSrc={project.imageSrc}
+                    hoverImageSrc={project.hoverImageSrc}
+                    disableHoverSlide={true}
+                    colorClass={project.colorClass}
+                    aspect={project.aspect}
+                  />
+                </Link>
               </div>
             ))}
           </motion.div>
@@ -212,16 +215,18 @@ export default function ProjectsClient() {
         <div className="flex flex-col space-y-14">
           {allProjects.map((project, idx) => (
             <div key={idx} className="w-full">
-              <ProjectCard
-                title={project.title}
-                category={project.category}
-                year={project.year}
-                imageSrc={project.imageSrc}
-                hoverImageSrc={project.hoverImageSrc}
-                disableHoverSlide={true}
-                colorClass={project.colorClass}
-                aspect={project.aspect}
-              />
+              <Link href={`/projects/${idx + 1}`} className="block w-full">
+                <ProjectCard
+                  title={project.title}
+                  category={project.category}
+                  year={project.year}
+                  imageSrc={project.imageSrc}
+                  hoverImageSrc={project.hoverImageSrc}
+                  disableHoverSlide={true}
+                  colorClass={project.colorClass}
+                  aspect={project.aspect}
+                />
+              </Link>
             </div>
           ))}
         </div>
