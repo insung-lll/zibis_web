@@ -73,9 +73,9 @@ export default function Home() {
             }`} 
           />
           
-          {/* 호버 시 아래에서 위로 슬라이드 인 되는 프로젝트 배경 (더미 이미지) */}
+          {/* 호버 시 아래에서 위로 슬라이드 인 되는 프로젝트 배경 */}
           <div 
-            className={`absolute inset-0 bg-[url('/img/2_1.jpg')] bg-cover bg-center transition-transform duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+            className={`absolute inset-0 bg-[url('/img/projects/homeludence_2.jpg')] bg-cover bg-center transition-transform duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] ${
               isHoveringProject ? 'translate-y-0' : 'translate-y-[100%]'
             }`}
           />
