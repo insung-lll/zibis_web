@@ -99,37 +99,37 @@ export default function ProjectsClient() {
       title: "OH OFFICE",
       colorClass: "bg-[#2A2B2D]",
       aspect: "aspect-[1.5]", // 가로형
-      width: "w-[32vw] min-w-[480px]"
+      width: "w-[25vw] min-w-[340px] max-w-[420px]"
     },
     {
       title: "MYRTLE POOL HOUSE",
       colorClass: "bg-[#3D3A38]",
       aspect: "aspect-[0.7]", // 세로형
-      width: "w-[22vw] min-w-[330px]"
+      width: "w-[17.5vw] min-w-[240px] max-w-[290px]"
     },
     {
       title: "LOWER BOWEN",
       colorClass: "bg-[#1E2124]",
       aspect: "aspect-[1.4]", // 가로형
-      width: "w-[30vw] min-w-[450px]"
+      width: "w-[23vw] min-w-[310px] max-w-[390px]"
     },
     {
       title: "JALOURA GUEST HOUSE",
       colorClass: "bg-[#2F2E2C]",
       aspect: "aspect-[0.75]", // 세로형
-      width: "w-[24vw] min-w-[360px]"
+      width: "w-[19vw] min-w-[260px] max-w-[310px]"
     },
     {
       title: "JALOURA MAIN HOUSE",
       colorClass: "bg-[#2E3135]",
       aspect: "aspect-[1.3]", // 가로형
-      width: "w-[28vw] min-w-[420px]"
+      width: "w-[21vw] min-w-[290px] max-w-[360px]"
     },
     {
       title: "RUNIC",
       colorClass: "bg-[#232426]",
       aspect: "aspect-[0.7]", // 세로형
-      width: "w-[22vw] min-w-[330px]"
+      width: "w-[17.5vw] min-w-[240px] max-w-[290px]"
     }
   ];
 
