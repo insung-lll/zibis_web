@@ -19,23 +19,23 @@ export default function ProjectCard({
 }: ProjectCardProps) {
   return (
     <motion.div 
-      initial={{ opacity: 0, y: 60 }}
+      initial={{ opacity: 0, y: 75 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-10% 0px" }}
-      transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] as const }}
+      viewport={{ once: true, amount: 0.25 }}
+      transition={{ duration: 1.5, ease: [0.19, 1, 0.22, 1] as const }}
       className="group cursor-pointer select-none"
     >
       {/* 단색 미디어 영역 (스크롤시 scale 1.1 -> 1.0 리빌 & 호버시 1.06 확장) */}
       <div className={`relative overflow-hidden ${aspect} w-full bg-[#1A1A1A]`}>
         <motion.div 
           className={`absolute inset-0 ${colorClass} opacity-90 transition-opacity group-hover:opacity-100`}
-          initial={{ scale: 1.12 }}
+          initial={{ scale: 1.15 }}
           whileInView={{ scale: 1.0 }}
           whileHover={{ scale: 1.06 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, amount: 0.25 }}
           transition={{ 
-            scale: { duration: 1.2, ease: [0.16, 1, 0.3, 1] as const },
-            opacity: { duration: 0.5 }
+            scale: { duration: 1.8, ease: [0.19, 1, 0.22, 1] as const },
+            opacity: { duration: 0.6 }
           }}
         />
         
@@ -52,10 +52,10 @@ export default function ProjectCard({
       
       {/* 텍스트 설명 정보 (약간의 딜레이와 함께 스크롤 업 리빌) */}
       <motion.div 
-        initial={{ opacity: 0, y: 15 }}
+        initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] as const, delay: 0.2 }}
+        viewport={{ once: true, amount: 0.25 }}
+        transition={{ duration: 1.2, ease: [0.19, 1, 0.22, 1] as const, delay: 0.3 }}
         className="mt-4 flex justify-between items-start text-xs tracking-wider text-[#111111]"
       >
         <div className="space-y-1">
