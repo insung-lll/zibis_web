@@ -41,17 +41,17 @@ export default function Home() {
       title: "Sidney House",
       category: "Residential Architecture",
       year: "2025",
-      colorClass: "bg-[#1E2124]",
-      span: "xl:col-span-4 w-full min-w-[100%] xl:min-w-[380px] justify-self-start",
-      aspect: "aspect-[3/4]" as const
+      colorClass: "bg-[#2F2E2C]",
+      span: "xl:col-span-7 w-full min-w-[100%] xl:min-w-[640px] justify-self-start",
+      aspect: "aspect-[16/10]" as const
     },
     {
       title: "Sidney House",
       category: "Residential Architecture",
       year: "2025",
-      colorClass: "bg-[#2F2E2C]",
-      span: "xl:col-start-6 xl:col-span-7 w-full min-w-[100%] xl:min-w-[640px] justify-self-end",
-      aspect: "aspect-[16/10]" as const
+      colorClass: "bg-[#1E2124]",
+      span: "xl:col-start-9 xl:col-span-4 w-full min-w-[100%] xl:min-w-[380px] justify-self-end",
+      aspect: "aspect-[3/4]" as const
     }
   ];
 
