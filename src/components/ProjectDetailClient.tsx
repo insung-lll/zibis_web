@@ -98,32 +98,65 @@ export default function ProjectDetailClient({ projectId }: ProjectDetailClientPr
       </section>
 
       {/* 3. Smart Lighting Solution Section */}
-      <section className="py-24 md:py-32 px-6 md:px-12 w-full bg-[#EBEBE9]">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-24 items-center">
-          <div className="md:col-span-6 flex flex-col justify-center">
-            <h3 className="text-3xl md:text-5xl font-bold tracking-tight mb-8">ZIBIS IoT Lighting</h3>
-            <p className="text-base md:text-lg opacity-80 leading-relaxed mb-12">
-              화이트 톤으로 정돈한 24평 아파트 인테리어. 군더더기 없는 공간에 지비스 IoT 조명을 적용해,
-              아침에는 활기찬 주광색으로, 저녁에는 아늑한 전구색으로 변환되며 사용자의 바이오리듬에 맞춘 최적의 조명 환경을 제공합니다.
+      <section className="py-24 md:py-48 px-6 md:px-12 w-full bg-[#F9F9F7]">
+        <div className="max-w-screen-2xl mx-auto flex flex-col">
+          {/* 텍스트 영역 */}
+          <div className="mb-24 md:mb-32">
+            <h3 className="text-2xl md:text-3xl font-bold tracking-tight mb-6">지비스 스마트 조명</h3>
+            <p className="text-base md:text-lg opacity-80 leading-relaxed text-[#111111]">
+              휴식과 집중이 모두 가능한 다목적 공간.<br />
+              시간과 상황에 따라 빛의 온도와 밝기가 자연스럽게 바뀌는 집을 완성했습니다
             </p>
-            <div className="space-y-4">
-              <div className="border-b border-[#111111]/10 pb-4">
-                <p className="font-bold text-sm tracking-widest uppercase mb-1">Used Products</p>
-                <p className="text-[#111111]/70">ZIBIS 3인치 스마트 다운라이트, ZIBIS 스마트 스트립 라이트</p>
+          </div>
+          
+          {/* 제품 썸네일 그리드 영역 */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-x-8 gap-y-16 items-end">
+            {/* Product 1 */}
+            <div className="flex flex-col items-center">
+              <div className="relative w-full aspect-square mb-6 bg-[#EBEBE9] flex items-center justify-center">
+                <span className="text-[#111111]/30 text-xs">M15 Image</span>
               </div>
-              <div className="border-b border-[#111111]/10 pb-4">
-                <p className="font-bold text-sm tracking-widest uppercase mb-1">Color Temp</p>
-                <p className="text-[#111111]/70">2700K - 6500K (Tunable White)</p>
+              <p className="font-bold text-sm md:text-base tracking-tight text-center">M15 스마트</p>
+            </div>
+            {/* Product 2 */}
+            <div className="flex flex-col items-center">
+              <div className="relative w-full aspect-[16/9] mb-6 bg-[#EBEBE9] flex items-center justify-center">
+                <span className="text-[#111111]/30 text-xs">Slot 6 Image</span>
               </div>
+              <p className="font-bold text-sm md:text-base tracking-tight text-center">슬롯6구</p>
+            </div>
+            {/* Product 3 */}
+            <div className="flex flex-col items-center">
+              <div className="relative w-full aspect-square mb-6 bg-[#EBEBE9] flex items-center justify-center">
+                <span className="text-[#111111]/30 text-xs">Downlight 3 Image</span>
+              </div>
+              <p className="font-bold text-sm md:text-base tracking-tight text-center">다운라이트 3</p>
+            </div>
+            {/* Product 4 */}
+            <div className="flex flex-col items-center">
+              <div className="relative w-full aspect-video mb-6 bg-[#EBEBE9] flex items-center justify-center">
+                <span className="text-[#111111]/30 text-xs">Controller Image</span>
+              </div>
+              <p className="font-bold text-sm md:text-base tracking-tight text-center">컨트롤러</p>
             </div>
           </div>
-          <div className="md:col-span-6 relative aspect-[4/5] overflow-hidden">
-            <Image 
-              src="/img/projects/homeludence_2.jpg" 
-              alt="Smart Lighting Focus" 
-              fill 
-              className="object-cover" 
-            />
+
+          {/* 왜 이 제품을 사용했는지 (Why ZIBIS IoT) */}
+          <div className="mt-24 md:mt-32 max-w-5xl border-t border-[#111111]/10 pt-16 grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-24">
+            <div>
+              <h4 className="text-xl md:text-2xl font-bold tracking-tight mb-4">왜 지비스 스마트 조명인가요?</h4>
+              <p className="text-sm md:text-base opacity-75 leading-relaxed text-[#111111]">
+                신촌 아이파크 현장은 24평의 아담한 평수를 최대한 넓고 쾌적하게 활용하는 것이 핵심이었습니다. 
+                물리적인 공간 확장의 한계를 넘기 위해, 하나의 조명으로 다양한 색온도(2700K~6500K)와 조도(밝기)를 자유롭게 조절할 수 있는 <strong>지비스 IoT 스마트 조명 시스템</strong>을 도입했습니다.
+              </p>
+            </div>
+            <div>
+              <h4 className="text-xl md:text-2xl font-bold tracking-tight mb-4">공간을 확장하는 빛의 시나리오</h4>
+              <p className="text-sm md:text-base opacity-75 leading-relaxed text-[#111111]">
+                아침에는 활기찬 주광색(6500K)의 'M15 스마트'로 집중도를 높이고, 저녁에는 따뜻한 전구색(2700K)의 간접 조명으로 아늑한 휴식 공간을 연출합니다. 
+                복잡한 물리적 공사 없이, 앱과 전용 컨트롤러를 통한 <strong>원터치 시나리오 변경</strong>만으로 완전히 다른 분위기의 공간들을 만들어냅니다.
+              </p>
+            </div>
           </div>
         </div>
       </section>
