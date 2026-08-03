@@ -3,6 +3,7 @@
 import { useRef, useState, useEffect } from 'react';
 import { motion, useMotionValue, animate } from 'framer-motion';
 import RevealText from '@/components/RevealText';
+import ProjectCard from '@/components/ProjectCard';
 
 // 러버밴드(고무줄) 오버스크롤 튜닝값 — iOS 스타일: 당길수록 저항이 점점 세져서 MAX값엔 점근만 함(벽에 부딪히지 않음)
 const RUBBER_BAND_MAX = 70; // 시각적으로 당겨지는 최대 픽셀
@@ -96,39 +97,53 @@ export default function ProjectsClient() {
 
   const allProjects = [
     {
-      title: "OH OFFICE",
+      title: "신촌 아이파크",
+      category: "@HOMELUDENCE",
+      year: "2026",
+      imageSrc: "/img/projects/homeludence_1.jpg",
+      hoverImageSrc: "/img/projects/homeludence_2.jpg",
       colorClass: "bg-[#2A2B2D]",
-      aspect: "aspect-[1.5]", // 가로형
-      width: "w-[25vw] min-w-[340px] max-w-[420px]"
+      aspect: "aspect-[4/5]" as const,
+      width: "w-[22vw] min-w-[320px] max-w-[400px]"
     },
     {
-      title: "MYRTLE POOL HOUSE",
+      title: "PROJECT 02",
+      category: "UPCOMING PROJECT",
+      year: "2026",
       colorClass: "bg-[#3D3A38]",
-      aspect: "aspect-[0.7]", // 세로형
+      aspect: "aspect-[3/4]" as const,
       width: "w-[17.5vw] min-w-[240px] max-w-[290px]"
     },
     {
-      title: "LOWER BOWEN",
+      title: "PROJECT 03",
+      category: "UPCOMING PROJECT",
+      year: "2026",
       colorClass: "bg-[#1E2124]",
-      aspect: "aspect-[1.4]", // 가로형
-      width: "w-[23vw] min-w-[310px] max-w-[390px]"
+      aspect: "aspect-[16/10]" as const,
+      width: "w-[26vw] min-w-[350px] max-w-[440px]"
     },
     {
-      title: "JALOURA GUEST HOUSE",
+      title: "PROJECT 04",
+      category: "UPCOMING PROJECT",
+      year: "2026",
       colorClass: "bg-[#2F2E2C]",
-      aspect: "aspect-[0.75]", // 세로형
+      aspect: "aspect-[4/5]" as const,
       width: "w-[19vw] min-w-[260px] max-w-[310px]"
     },
     {
-      title: "JALOURA MAIN HOUSE",
+      title: "PROJECT 05",
+      category: "UPCOMING PROJECT",
+      year: "2026",
       colorClass: "bg-[#2E3135]",
-      aspect: "aspect-[1.3]", // 가로형
+      aspect: "aspect-[4/3]" as const,
       width: "w-[21vw] min-w-[290px] max-w-[360px]"
     },
     {
-      title: "RUNIC",
+      title: "PROJECT 06",
+      category: "UPCOMING PROJECT",
+      year: "2026",
       colorClass: "bg-[#232426]",
-      aspect: "aspect-[0.7]", // 세로형
+      aspect: "aspect-[3/4]" as const,
       width: "w-[17.5vw] min-w-[240px] max-w-[290px]"
     }
   ];
@@ -146,25 +161,22 @@ export default function ProjectsClient() {
 
           {/* 프로젝트 리스트가 가로로 나열되는 내부 영역 (w-max로 콘텐츠 너비 확보) */}
           {/* overscrollX: 스크롤 끝에서의 러버밴드 효과를 위한 별도 트랜스폼 레이어 */}
-          <motion.div style={{ x: overscrollX }} className="flex items-end space-x-4 pl-12 md:pl-24 pr-5 h-[60vh] w-max">
+          <motion.div style={{ x: overscrollX }} className="flex items-end space-x-6 pl-12 md:pl-24 pr-5 h-[60vh] w-max">
             {allProjects.map((project, idx) => (
-              <motion.div
+              <div
                 key={idx}
-                initial={{ opacity: 0, y: 40 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, ease: [0.65, 0, 0.35, 1], delay: 0.2 + idx * 0.09 }}
-                className={`flex-shrink-0 flex flex-col space-y-4 ${project.width}`}
+                className={`flex-shrink-0 ${project.width}`}
               >
-
-                <div className={`relative overflow-hidden ${project.colorClass} ${project.aspect} w-full`}>
-                  <div className="absolute inset-0 bg-black/5 opacity-0 hover:opacity-100 transition-opacity duration-500" />
-                </div>
-
-                <span className="text-[10px] font-mono font-bold tracking-widest uppercase text-[#111111]">
-                  {project.title}
-                </span>
-
-              </motion.div>
+                <ProjectCard
+                  title={project.title}
+                  category={project.category}
+                  year={project.year}
+                  imageSrc={project.imageSrc}
+                  hoverImageSrc={project.hoverImageSrc}
+                  colorClass={project.colorClass}
+                  aspect={project.aspect}
+                />
+              </div>
             ))}
           </motion.div>
         </div>
@@ -198,11 +210,16 @@ export default function ProjectsClient() {
 
         <div className="flex flex-col space-y-14">
           {allProjects.map((project, idx) => (
-            <div key={idx} className="flex flex-col space-y-4 w-full">
-              <div className={`relative overflow-hidden ${project.colorClass} ${project.aspect} w-full`} />
-              <span className="text-[10px] font-mono font-bold tracking-widest uppercase text-[#111111]">
-                {project.title}
-              </span>
+            <div key={idx} className="w-full">
+              <ProjectCard
+                title={project.title}
+                category={project.category}
+                year={project.year}
+                imageSrc={project.imageSrc}
+                hoverImageSrc={project.hoverImageSrc}
+                colorClass={project.colorClass}
+                aspect={project.aspect}
+              />
             </div>
           ))}
         </div>
