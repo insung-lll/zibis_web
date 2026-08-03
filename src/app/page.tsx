@@ -227,7 +227,7 @@ export default function Home() {
             </Link>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-12 gap-x-6 gap-y-16 xl:gap-y-32 items-start">
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-12 gap-x-6 gap-y-16 xl:gap-y-52 items-start">
             {projects.map((project, idx) => (
               <div key={idx} className={`${project.span}`}>
                 <ProjectCard
