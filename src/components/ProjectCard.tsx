@@ -91,20 +91,14 @@ export default function ProjectCard({
           </span>
         </div>
         
-        {/* VIEW PROJECT 버튼 (이미지 포함 전체 카드 호버 시 애니메이션 동작) */}
+        {/* VIEW PROJECT 텍스트 버튼 (이미지 포함 전체 카드 호버 시 밑줄 및 화살표 애니메이션 동작) */}
         <div className="pt-0.5">
-          <div
-            className="relative overflow-hidden bg-[#036CC5] rounded-full px-4 py-2 text-[10px] md:px-5 md:py-2.5 md:text-[11px] font-semibold tracking-widest uppercase text-[#F9F9F7] inline-flex items-center justify-center z-10"
-          >
-            <div className="relative z-10 h-[12px] md:h-[14px] overflow-hidden flex flex-col justify-start pointer-events-none select-none leading-[12px] md:leading-[14px] text-center">
-              <span className="transition-transform duration-500 ease-[0.76,0,0.24,1] group-hover:-translate-y-full block text-[#F9F9F7]">
-                VIEW PROJECT
-              </span>
-              <span className="transition-transform duration-500 ease-[0.76,0,0.24,1] group-hover:-translate-y-full block absolute top-full text-[#F9F9F7] left-0 right-0">
-                VIEW PROJECT
-              </span>
-            </div>
-            <span className="relative z-10 ml-1.5 md:ml-2 text-[12px] md:text-[14px] relative -top-[1px] text-[#F9F9F7] pointer-events-none select-none leading-[12px] md:leading-[14px]">→</span>
+          <div className="inline-flex items-center text-[10px] md:text-xs font-mono font-semibold tracking-widest uppercase text-[#111111]/60 whitespace-nowrap transition-colors duration-300 group-hover:text-[#111111]">
+            <span className="relative pb-0.5 z-10">
+              VIEW PROJECT
+              <span className="absolute bottom-0 left-0 w-full h-[1px] bg-[#111111] origin-left scale-x-0 transition-transform duration-300 ease-out group-hover:scale-x-100" />
+            </span>
+            <span className="ml-1.5 md:ml-2 text-[12px] md:text-[14px] relative -top-[1px] z-10 leading-none transition-transform duration-300 group-hover:translate-x-1">→</span>
           </div>
         </div>
       </motion.div>
