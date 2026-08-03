@@ -18,13 +18,25 @@ export default function ProjectCard({
   aspect = 'aspect-[4/3]'
 }: ProjectCardProps) {
   return (
-    <div className="group cursor-pointer select-none">
-      {/* 단색 미디어 영역 */}
+    <motion.div 
+      initial={{ opacity: 0, y: 60 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-10% 0px" }}
+      transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] as const }}
+      className="group cursor-pointer select-none"
+    >
+      {/* 단색 미디어 영역 (스크롤시 scale 1.1 -> 1.0 리빌 & 호버시 1.06 확장) */}
       <div className={`relative overflow-hidden ${aspect} w-full bg-[#1A1A1A]`}>
         <motion.div 
           className={`absolute inset-0 ${colorClass} opacity-90 transition-opacity group-hover:opacity-100`}
+          initial={{ scale: 1.12 }}
+          whileInView={{ scale: 1.0 }}
           whileHover={{ scale: 1.06 }}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] as const }}
+          viewport={{ once: true }}
+          transition={{ 
+            scale: { duration: 1.2, ease: [0.16, 1, 0.3, 1] as const },
+            opacity: { duration: 0.5 }
+          }}
         />
         
         {/* 가상 레이아웃 및 엠블럼 효과 */}
@@ -38,8 +50,14 @@ export default function ProjectCard({
         <div className="absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
       </div>
       
-      {/* 텍스트 설명 정보 */}
-      <div className="mt-4 flex justify-between items-start text-xs tracking-wider text-[#111111]">
+      {/* 텍스트 설명 정보 (약간의 딜레이와 함께 스크롤 업 리빌) */}
+      <motion.div 
+        initial={{ opacity: 0, y: 15 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] as const, delay: 0.2 }}
+        className="mt-4 flex justify-between items-start text-xs tracking-wider text-[#111111]"
+      >
         <div className="space-y-1">
           <h4 className="font-medium text-sm tracking-normal group-hover:translate-x-1 transition-transform duration-300">
             {title}
@@ -49,7 +67,7 @@ export default function ProjectCard({
           </span>
         </div>
         <span className="font-mono text-[10px] text-[#111111]/50">{year}</span>
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 }
