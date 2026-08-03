@@ -99,37 +99,37 @@ export default function ProjectsClient() {
       title: "OH OFFICE",
       colorClass: "bg-[#2A2B2D]",
       aspect: "aspect-[1.5]", // 가로형
-      width: "w-[22.5vw] min-w-[320px]"
+      width: "w-[32vw] min-w-[480px]"
     },
     {
       title: "MYRTLE POOL HOUSE",
       colorClass: "bg-[#3D3A38]",
       aspect: "aspect-[0.7]", // 세로형
-      width: "w-[16vw] min-w-[220px]"
+      width: "w-[22vw] min-w-[330px]"
     },
     {
       title: "LOWER BOWEN",
       colorClass: "bg-[#1E2124]",
       aspect: "aspect-[1.4]", // 가로형
-      width: "w-[21vw] min-w-[300px]"
+      width: "w-[30vw] min-w-[450px]"
     },
     {
       title: "JALOURA GUEST HOUSE",
       colorClass: "bg-[#2F2E2C]",
       aspect: "aspect-[0.75]", // 세로형
-      width: "w-[17.5vw] min-w-[240px]"
+      width: "w-[24vw] min-w-[360px]"
     },
     {
       title: "JALOURA MAIN HOUSE",
       colorClass: "bg-[#2E3135]",
       aspect: "aspect-[1.3]", // 가로형
-      width: "w-[19vw] min-w-[280px]"
+      width: "w-[28vw] min-w-[420px]"
     },
     {
       title: "RUNIC",
       colorClass: "bg-[#232426]",
       aspect: "aspect-[0.7]", // 세로형
-      width: "w-[16vw] min-w-[220px]"
+      width: "w-[22vw] min-w-[330px]"
     }
   ];
 
