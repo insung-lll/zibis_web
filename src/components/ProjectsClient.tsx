@@ -173,6 +173,7 @@ export default function ProjectsClient() {
                   year={project.year}
                   imageSrc={project.imageSrc}
                   hoverImageSrc={project.hoverImageSrc}
+                  disableHoverSlide={true}
                   colorClass={project.colorClass}
                   aspect={project.aspect}
                 />
@@ -217,6 +218,7 @@ export default function ProjectsClient() {
                 year={project.year}
                 imageSrc={project.imageSrc}
                 hoverImageSrc={project.hoverImageSrc}
+                disableHoverSlide={true}
                 colorClass={project.colorClass}
                 aspect={project.aspect}
               />

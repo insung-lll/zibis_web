@@ -8,6 +8,7 @@ interface ProjectCardProps {
   colorClass?: string;
   imageSrc?: string;
   hoverImageSrc?: string;
+  disableHoverSlide?: boolean;
   aspect?: 'aspect-[4/5]' | 'aspect-[4/3]' | 'aspect-[3/4]' | 'aspect-video' | 'aspect-square' | 'aspect-[16/10]';
 }
 
@@ -18,8 +19,11 @@ export default function ProjectCard({
   colorClass = 'bg-[#222222]',
   imageSrc,
   hoverImageSrc,
+  disableHoverSlide = false,
   aspect = 'aspect-[4/3]'
 }: ProjectCardProps) {
+  const showSlideHover = hoverImageSrc && !disableHoverSlide;
+
   return (
     <motion.div 
       initial={{ opacity: 0, y: 75 }}
@@ -32,8 +36,12 @@ export default function ProjectCard({
       <div className={`relative overflow-hidden ${aspect} w-full bg-[#F9F9F7]`}>
         {imageSrc ? (
           <>
-            {/* 기본 이미지: 호버 시 위로 이동하며 90% 축소 */}
-            <div className="absolute inset-0 transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] origin-center group-hover:-translate-y-[5%] group-hover:scale-90">
+            {/* 기본 이미지: disableHoverSlide 시 은은한 줌(scale-105), 아닐 시 위로 이동하며 90% 축소 */}
+            <div className={`absolute inset-0 transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] origin-center ${
+              showSlideHover 
+                ? 'group-hover:-translate-y-[5%] group-hover:scale-90' 
+                : 'group-hover:scale-105'
+            }`}>
               <Image 
                 src={imageSrc} 
                 alt={title} 
@@ -42,8 +50,8 @@ export default function ProjectCard({
               />
             </div>
 
-            {/* 호버 이미지: 호버 시 아래에서 위로 올라오는 애니메이션 */}
-            {hoverImageSrc && (
+            {/* 호버 이미지: showSlideHover 일 때만 아래에서 위로 올라오는 애니메이션 적용 */}
+            {showSlideHover && (
               <div className="absolute inset-0 transition-transform duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] translate-y-[100%] group-hover:translate-y-0">
                 <Image 
                   src={hoverImageSrc} 
