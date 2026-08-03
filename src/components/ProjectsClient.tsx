@@ -111,8 +111,8 @@ export default function ProjectsClient() {
       category: "UPCOMING PROJECT",
       year: "2026",
       colorClass: "bg-[#3D3A38]",
-      aspect: "aspect-[4/3]" as const,
-      width: "w-[24vw] min-w-[330px] max-w-[410px]"
+      aspect: "aspect-[16/10]" as const,
+      width: "w-[26vw] min-w-[360px] max-w-[440px]"
     },
     {
       title: "PROJECT 03",
@@ -143,8 +143,8 @@ export default function ProjectsClient() {
       category: "UPCOMING PROJECT",
       year: "2026",
       colorClass: "bg-[#232426]",
-      aspect: "aspect-[4/3]" as const,
-      width: "w-[24vw] min-w-[330px] max-w-[410px]"
+      aspect: "aspect-[16/10]" as const,
+      width: "w-[26vw] min-w-[360px] max-w-[440px]"
     }
   ];
 
