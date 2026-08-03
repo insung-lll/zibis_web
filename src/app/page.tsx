@@ -51,7 +51,7 @@ export default function Home() {
       year: "2025",
       colorClass: "bg-[#2F2E2C]",
       span: "xl:col-start-6 xl:col-span-7 w-full min-w-[100%] xl:min-w-[640px] justify-self-end",
-      aspect: "aspect-[4/5]" as const
+      aspect: "aspect-[16/10]" as const
     }
   ];
 
