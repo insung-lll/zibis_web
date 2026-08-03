@@ -176,10 +176,10 @@ export default function Home() {
             {/* Bottom Row: Description */}
             <div className="lg:col-span-9 lg:col-start-4">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-3">
-                <div className="space-y-10 lg:ml-2 w-full max-w-[640px]">
+                <div className="space-y-10 lg:ml-2 w-full">
                   <RevealText 
                     delay={0.2} 
-                    className="text-[14px] md:text-[15px] font-medium leading-[1.4] text-[#111111] opacity-70 break-keep"
+                    className="text-[16px] md:text-[18px] font-medium leading-[1.6] text-[#111111] opacity-70"
                   >
                     조명은 인테리어가 끝난 후 고르는 소품이 아닙니다. 벽과 천장의 배선이 이루어지는 가장 첫 단계에서 뼈대를 세워야 완벽한 스마트홈이 탄생합니다. 지비스는 혁신적인 2WIRE 배선 기술과 끊김 없는 무선 통신으로 재공사 없는 가장 확실한 스마트 조명 인프라를 제안합니다.
                   </RevealText>
