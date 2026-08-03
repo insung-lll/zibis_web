@@ -29,11 +29,11 @@ export default function ProjectCard({
       className="group cursor-pointer select-none"
     >
       {/* 미디어 영역 (이미지 또는 단색 배경) */}
-      <div className={`relative overflow-hidden ${aspect} w-full bg-[#111111]`}>
+      <div className={`relative overflow-hidden ${aspect} w-full bg-[#F9F9F7]`}>
         {imageSrc ? (
           <>
             {/* 기본 이미지: 호버 시 위로 이동하며 90% 축소 */}
-            <div className="absolute inset-0 transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] origin-center group-hover:-translate-y-[5%] group-hover:scale-90 group-hover:opacity-50">
+            <div className="absolute inset-0 transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] origin-center group-hover:-translate-y-[5%] group-hover:scale-90">
               <Image 
                 src={imageSrc} 
                 alt={title} 
