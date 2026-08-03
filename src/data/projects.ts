@@ -115,5 +115,31 @@ export const projects: ProjectData[] = [
     gallery: [
       { image: "/img/hero_1.jpg", colSpan: "col-span-1 md:col-span-12", aspect: "aspect-[16/9]" }
     ]
+  },
+  {
+    id: "4",
+    title: "PROJECT 04",
+    location: "SEOUL, KOREA",
+    partner: "@UPCOMING",
+    date: "2025.04",
+    thumbnailImage: "/img/projects/homeludence_2.jpg", // placeholder
+    heroImage: "/img/projects/homeludence_1.jpg", // placeholder
+    category: "UPCOMING PROJECT",
+    year: "2025",
+    width: "w-[85vw] md:w-[600px]",
+    colorClass: "bg-[#2F2E2C]",
+    aspect: "aspect-[16/10]",
+    brief: "빛의 리듬이 살아 숨쉬는 공간.",
+    briefSub: "사용자의 동선과 라이프스타일에 맞춘 섬세한 조명 디자인",
+    whyZibisTitle1: "왜 지비스 스마트 조명인가요?",
+    whyZibisDesc1: "일상적인 공간의 한계를 넘어 감성적인 빛의 연출을 위해 다양한 환경 시나리오 설정이 가능한 지비스 시스템을 채택했습니다.",
+    whyZibisTitle2: "입체적인 공간감 부여",
+    whyZibisDesc2: "시간대에 따라 달라지는 자연광에 맞춰 인공 조명이 부드럽게 개입하여 일관된 시각적 안정감을 제공합니다.",
+    products: [
+      { name: "M15 스마트", image: "", aspect: "aspect-square" }
+    ],
+    gallery: [
+      { image: "/img/projects/homeludence_1.jpg", colSpan: "col-span-1 md:col-span-12", aspect: "aspect-[16/9]" }
+    ]
   }
 ];
