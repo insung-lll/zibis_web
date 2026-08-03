@@ -103,8 +103,8 @@ export default function ProjectsClient() {
     title: p.title,
     category: p.partner,
     year: p.year,
-    imageSrc: p.hoverImageSrc || p.heroImage,
-    hoverImageSrc: p.hoverImageSrc,
+    imageSrc: p.thumbnailImage,
+    hoverImageSrc: p.heroImage,
     colorClass: p.colorClass,
     aspect: p.aspect,
     width: p.width

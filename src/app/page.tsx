@@ -36,8 +36,8 @@ export default function Home() {
     title: p.title,
     category: p.partner,
     year: p.year,
-    imageSrc: p.hoverImageSrc || p.heroImage,
-    hoverImageSrc: p.hoverImageSrc,
+    imageSrc: p.thumbnailImage,
+    hoverImageSrc: p.heroImage,
     colorClass: p.colorClass,
     span: gridSpans[i % gridSpans.length].span,
     aspect: gridSpans[i % gridSpans.length].aspect
@@ -57,7 +57,7 @@ export default function Home() {
             className={`absolute inset-0 bg-cover bg-center transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] origin-center ${
               isHoveringProject ? '-translate-y-[5%] scale-90 opacity-50' : 'translate-y-0 scale-100 opacity-100'
             }`} 
-            style={{ backgroundImage: `url(${latestProject.heroImage})` }}
+            style={{ backgroundImage: `url(${latestProject.thumbnailImage})` }}
           />
           
           {/* 호버 시 아래에서 위로 슬라이드 인 되는 프로젝트 배경 */}
@@ -65,7 +65,7 @@ export default function Home() {
             className={`absolute inset-0 bg-cover bg-center transition-transform duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] ${
               isHoveringProject ? 'translate-y-0' : 'translate-y-[100%]'
             }`}
-            style={{ backgroundImage: `url(${latestProject.hoverImageSrc || latestProject.heroImage})` }}
+            style={{ backgroundImage: `url(${latestProject.heroImage})` }}
           />
         </div>
         <motion.div 

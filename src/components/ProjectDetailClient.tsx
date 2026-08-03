@@ -149,20 +149,24 @@ export default function ProjectDetailClient({ projectId }: ProjectDetailClientPr
       {/* 4. Image Gallery Section */}
       <section className="py-24 md:py-32 px-6 md:px-12 w-full max-w-screen-2xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-12">
-          {projectData.gallery.map((item, idx) => (
-            <div key={idx} className={`${item.colSpan} relative ${item.aspect} overflow-hidden group bg-[#EBEBE9] flex items-center justify-center`}>
-              {item.image ? (
-                <Image 
-                  src={item.image} 
-                  alt={`Gallery Image ${idx + 1}`} 
-                  fill 
-                  className="object-cover transition-transform duration-1000 group-hover:scale-105" 
-                />
-              ) : (
-                <span className="text-[#111111]/30 text-sm tracking-widest">ZIBIS</span>
-              )}
-            </div>
-          ))}
+          {/* 첫 번째 갤러리 이미지는 규칙에 따라 항상 thumbnailImage(리스트 기본 썸네일)를 렌더링합니다 */}
+          {projectData.gallery.map((item, idx) => {
+            const imageSrc = idx === 0 ? projectData.thumbnailImage : item.image;
+            return (
+              <div key={idx} className={`${item.colSpan} relative ${item.aspect} overflow-hidden group bg-[#EBEBE9] flex items-center justify-center`}>
+                {imageSrc ? (
+                  <Image 
+                    src={imageSrc} 
+                    alt={`Gallery Image ${idx + 1}`} 
+                    fill 
+                    className="object-cover transition-transform duration-1000 group-hover:scale-105" 
+                  />
+                ) : (
+                  <span className="text-[#111111]/30 text-sm tracking-widest">ZIBIS</span>
+                )}
+              </div>
+            );
+          })}
         </div>
       </section>
 

@@ -4,8 +4,8 @@ export interface ProjectData {
   location: string;
   partner: string;
   date: string;
-  heroImage: string; // Detail page hero image
-  hoverImageSrc: string; // List page default image
+  thumbnailImage: string; // 리스트에서 기본으로 보여지는 썸네일 (상세페이지 히어로 다음 순서 이미지)
+  heroImage: string;      // 리스트에서 호버 시 올라오는 이미지 (상세페이지 히어로 이미지)
   category: string;
   year: string;
   width: string;
@@ -36,8 +36,9 @@ export const projects: ProjectData[] = [
     location: "SEOUL, KOREA",
     partner: "@HOMELUDENCE",
     date: "2026.01",
-    heroImage: "/img/projects/homeludence_1.jpg", // Detail hero
-    hoverImageSrc: "/img/projects/homeludence_1.jpg", // Default image shown on list
+    thumbnailImage: "/img/projects/homeludence_2.jpg", // 호버 전 기본 썸네일 (히어로 다음 갤러리 이미지)
+    heroImage: "/img/projects/homeludence_1.jpg",      // 호버 시 올라오는 이미지 (히어로 메인 이미지)
+
     category: "INTERIOR",
     year: "2026",
     width: "w-[85vw] md:w-[400px]",
@@ -56,8 +57,8 @@ export const projects: ProjectData[] = [
       { name: "컨트롤러", image: "", aspect: "aspect-video" }
     ],
     gallery: [
-      { image: "/img/projects/homeludence_1.jpg", colSpan: "col-span-1 md:col-span-12", aspect: "aspect-[16/9]" },
-      { image: "/img/projects/homeludence_2.jpg", colSpan: "col-span-1 md:col-span-6", aspect: "aspect-[3/4]" },
+      { image: "/img/projects/homeludence_2.jpg", colSpan: "col-span-1 md:col-span-12", aspect: "aspect-[16/9]" },
+      { image: "/img/projects/homeludence_1.jpg", colSpan: "col-span-1 md:col-span-6", aspect: "aspect-[3/4]" },
       { image: "", colSpan: "col-span-1 md:col-span-6", aspect: "aspect-[3/4]" }
     ]
   },
@@ -67,8 +68,8 @@ export const projects: ProjectData[] = [
     location: "BUSAN, KOREA",
     partner: "@DESIGN_STUDIO",
     date: "2025.11",
+    thumbnailImage: "/img/hero_2.jpg",
     heroImage: "/img/hero_2.jpg",
-    hoverImageSrc: "/img/hero_2.jpg",
     category: "COMMERCIAL",
     year: "2025",
     width: "w-[85vw] md:w-[600px]",
@@ -94,8 +95,8 @@ export const projects: ProjectData[] = [
     location: "JEJU, KOREA",
     partner: "@STAY_ARCHITECTS",
     date: "2025.08",
+    thumbnailImage: "/img/hero_1.jpg",
     heroImage: "/img/hero_1.jpg",
-    hoverImageSrc: "/img/hero_1.jpg",
     category: "EXHIBITION",
     year: "2025",
     width: "w-[85vw] md:w-[400px]",
