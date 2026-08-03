@@ -34,7 +34,7 @@ export default function Home() {
       category: "Residential Architecture",
       year: "2025",
       colorClass: "bg-[#3D3A38]",
-      span: "xl:col-start-8 xl:col-span-5 w-full min-w-[100%] xl:min-w-[460px] justify-self-end",
+      span: "xl:col-start-7 xl:col-span-6 w-full min-w-[100%] xl:min-w-[460px] justify-self-end",
       aspect: "aspect-[4/3]" as const
     },
     {
