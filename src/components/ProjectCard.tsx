@@ -7,6 +7,7 @@ interface ProjectCardProps {
   year: string;
   colorClass?: string;
   imageSrc?: string;
+  hoverImageSrc?: string;
   aspect?: 'aspect-[4/5]' | 'aspect-[4/3]' | 'aspect-[3/4]' | 'aspect-video' | 'aspect-square' | 'aspect-[16/10]';
 }
 
@@ -16,6 +17,7 @@ export default function ProjectCard({
   year, 
   colorClass = 'bg-[#222222]',
   imageSrc,
+  hoverImageSrc,
   aspect = 'aspect-[4/3]'
 }: ProjectCardProps) {
   return (
@@ -27,34 +29,39 @@ export default function ProjectCard({
       className="group cursor-pointer select-none"
     >
       {/* 미디어 영역 (이미지 또는 단색 배경) */}
-      <div className={`relative overflow-hidden ${aspect} w-full bg-[#1A1A1A]`}>
-        <motion.div 
-          className={`absolute inset-0 ${imageSrc ? '' : colorClass} opacity-90 transition-opacity group-hover:opacity-100`}
-          initial={{ scale: 1.15 }}
-          whileInView={{ scale: 1.0 }}
-          whileHover={{ scale: 1.06 }}
-          viewport={{ once: true, amount: 0.25 }}
-          transition={{ 
-            scale: { duration: 1.8, ease: [0.19, 1, 0.22, 1] as const },
-            opacity: { duration: 0.6 }
-          }}
-        >
-          {imageSrc && (
-            <Image 
-              src={imageSrc} 
-              alt={title} 
-              fill 
-              className="object-cover transition-transform duration-700 ease-out" 
-            />
-          )}
-        </motion.div>
-        
-        {/* 가상 레이아웃 및 엠블럼 효과 (이미지 미지정시에만 선명하게 노출) */}
-        {!imageSrc && (
-          <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-20 transition-opacity group-hover:opacity-40">
-            <span className="text-[9px] font-mono tracking-widest text-[#F9F9F7] uppercase border border-[#F9F9F7]/30 px-3 py-1.5">
-              ZIBIS
-            </span>
+      <div className={`relative overflow-hidden ${aspect} w-full bg-[#111111]`}>
+        {imageSrc ? (
+          <>
+            {/* 기본 이미지: 호버 시 위로 이동하며 90% 축소 */}
+            <div className="absolute inset-0 transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] origin-center group-hover:-translate-y-[5%] group-hover:scale-90 group-hover:opacity-50">
+              <Image 
+                src={imageSrc} 
+                alt={title} 
+                fill 
+                className="object-cover" 
+              />
+            </div>
+
+            {/* 호버 이미지: 호버 시 아래에서 위로 올라오는 애니메이션 */}
+            {hoverImageSrc && (
+              <div className="absolute inset-0 transition-transform duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] translate-y-[100%] group-hover:translate-y-0">
+                <Image 
+                  src={hoverImageSrc} 
+                  alt={`${title} hover`} 
+                  fill 
+                  className="object-cover" 
+                />
+              </div>
+            )}
+          </>
+        ) : (
+          /* 이미지 미지정 단색 플레이스홀더 영역 */
+          <div className={`absolute inset-0 ${colorClass} opacity-90 transition-opacity group-hover:opacity-100`}>
+            <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-20 transition-opacity group-hover:opacity-40">
+              <span className="text-[9px] font-mono tracking-widest text-[#F9F9F7] uppercase border border-[#F9F9F7]/30 px-3 py-1.5">
+                ZIBIS
+              </span>
+            </div>
           </div>
         )}
         

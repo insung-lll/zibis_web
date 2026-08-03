@@ -26,33 +26,31 @@ export default function Home() {
       category: "@HOMELUDENCE",
       year: "2026",
       imageSrc: "/img/projects/homeludence_1.jpg",
+      hoverImageSrc: "/img/projects/homeludence_2.jpg",
       colorClass: "bg-[#2A2B2D]",
       span: "xl:col-span-5 w-full min-w-[100%] xl:min-w-[460px] justify-self-start",
       aspect: "aspect-[4/5]" as const
     },
     {
-      title: "신촌 아이파크",
-      category: "@HOMELUDENCE",
+      title: "PROJECT 02",
+      category: "UPCOMING PROJECT",
       year: "2026",
-      imageSrc: "/img/projects/homeludence_2.jpg",
       colorClass: "bg-[#3D3A38]",
       span: "xl:col-start-7 xl:col-span-6 w-full min-w-[100%] xl:min-w-[460px] justify-self-end",
       aspect: "aspect-[4/3]" as const
     },
     {
-      title: "신촌 아이파크",
-      category: "@HOMELUDENCE",
+      title: "PROJECT 03",
+      category: "UPCOMING PROJECT",
       year: "2026",
-      imageSrc: "/img/projects/homeludence_3.jpg",
       colorClass: "bg-[#2F2E2C]",
       span: "xl:col-span-7 w-full min-w-[100%] xl:min-w-[640px] justify-self-start",
       aspect: "aspect-[16/10]" as const
     },
     {
-      title: "신촌 아이파크",
-      category: "@HOMELUDENCE",
+      title: "PROJECT 04",
+      category: "UPCOMING PROJECT",
       year: "2026",
-      imageSrc: "/img/projects/homeludence_4.jpg",
       colorClass: "bg-[#1E2124]",
       span: "xl:col-start-9 xl:col-span-4 w-full min-w-[100%] xl:min-w-[380px] justify-self-end",
       aspect: "aspect-[3/4]" as const
@@ -239,6 +237,7 @@ export default function Home() {
                   category={project.category}
                   year={project.year}
                   imageSrc={project.imageSrc}
+                  hoverImageSrc={project.hoverImageSrc}
                   colorClass={project.colorClass}
                   aspect={project.aspect}
                 />
