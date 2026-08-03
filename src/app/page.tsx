@@ -151,13 +151,10 @@ export default function Home() {
         {/* ZIBIS Story Section (Wide Layout) */}
         <div className="w-full mb-32 md:mb-48">
           {/* Huge Wide Title */}
-          <RevealText 
-            as="h2" 
-            className="text-[32px] md:text-[4vw] lg:text-[4vw] font-bold tracking-tight leading-[1.2] md:leading-[1.1] text-[#111111] mb-5 md:mb-8 break-keep relative -top-[30px] md:-top-[60px]"
-          >
+          <h2 className="text-[32px] md:text-[4vw] lg:text-[4vw] font-bold tracking-tight leading-[1.2] md:leading-[1.1] text-[#111111] mb-5 md:mb-8 break-keep relative -top-[30px] md:-top-[60px]">
             진정한 스마트홈의 완성은,<br className="hidden md:block" />
             공간이 시작될 때 설계되어야 합니다.
-          </RevealText>
+          </h2>
 
           {/* Content Layout (Images + Tag + Text) */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-x-4 gap-y-8 md:gap-y-8 lg:gap-y-10">
