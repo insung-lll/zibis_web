@@ -84,11 +84,11 @@ export default function ProjectCard({
       >
         <div className="space-y-1">
           <h4 className="font-bold text-base md:text-lg tracking-tight text-[#111111] overflow-hidden">
-            <div className="relative overflow-hidden flex flex-col justify-start leading-snug">
-              <span className="transition-transform duration-500 ease-[0.76,0,0.24,1] group-hover:-translate-y-full block">
+            <div className="relative overflow-hidden flex flex-col justify-start leading-none h-[1.15em] py-0 my-0">
+              <span className="transition-transform duration-500 ease-[0.76,0,0.24,1] group-hover:-translate-y-full block leading-none py-0 my-0">
                 {title}
               </span>
-              <span className="transition-transform duration-500 ease-[0.76,0,0.24,1] group-hover:-translate-y-full block absolute top-full left-0 right-0">
+              <span className="transition-transform duration-500 ease-[0.76,0,0.24,1] group-hover:-translate-y-full block absolute top-full left-0 right-0 leading-none py-0 my-0">
                 {title}
               </span>
             </div>
