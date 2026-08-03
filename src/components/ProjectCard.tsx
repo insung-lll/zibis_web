@@ -93,7 +93,7 @@ export default function ProjectCard({
         
         {/* VIEW PROJECT 텍스트 버튼 (이미지 포함 전체 카드 호버 시 밑줄 및 화살표 애니메이션 동작) */}
         <div className="pt-0.5">
-          <div className="inline-flex items-center text-[14px] md:text-[16px] font-mono font-semibold tracking-widest uppercase text-[#858584] whitespace-nowrap">
+          <div className="inline-flex items-center text-[14px] md:text-[16px] font-mono font-light tracking-wide uppercase text-[#858584] whitespace-nowrap">
             <span className="relative pb-0.5 z-10">
               VIEW PROJECT
               <span className="absolute bottom-0 left-0 w-full h-[1px] bg-[#858584] origin-left scale-x-0 transition-transform duration-300 ease-out group-hover:scale-x-100" />
