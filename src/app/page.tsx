@@ -141,9 +141,9 @@ export default function Home() {
         {/* ZIBIS Story Section (Wide Layout) */}
         <div className="w-full mb-16 md:mb-24">
           {/* Huge Wide Title */}
-          <h2 className="text-[32px] md:text-[4vw] lg:text-[4vw] font-bold tracking-tight leading-[1.2] md:leading-[1.1] text-[#111111] mb-5 md:mb-8 break-keep relative -top-[30px] md:-top-[60px]">
-            진정한 스마트홈의 완성은,<br className="hidden md:block" />
-            공간이 시작될 때 설계되어야 합니다.
+          <h2 className="text-[32px] md:text-[4vw] lg:text-[4vw] font-light tracking-tight leading-[1.2] md:leading-[1.1] text-[#111111] mb-5 md:mb-8 break-keep relative -top-[30px] md:-top-[60px]">
+            진정한 <span className="font-bold">스마트홈의 완성은,</span><br className="hidden md:block" />
+            <span className="font-bold">공간이 시작될 때</span> 설계되어야 합니다.
           </h2>
 
           {/* Content Layout (Images + Tag + Text) */}
