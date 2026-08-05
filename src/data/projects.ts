@@ -10,7 +10,7 @@ export interface ProjectData {
   year: string;
   width: string;
   colorClass: string;
-  aspect: string;
+  aspect: "aspect-[3/4]" | "aspect-square" | "aspect-video" | "aspect-[16/10]" | "aspect-[4/5]" | "aspect-[4/3]";
   brief: string; // "휴식과 집중이 모두 가능한..."
   briefSub: string; // "시간과 상황에 따라..."
   whyZibisTitle1: string; // 왜 지비스 스마트 조명인가요?

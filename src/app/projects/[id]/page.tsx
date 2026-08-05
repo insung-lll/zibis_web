@@ -1,4 +1,3 @@
-import Header from '@/components/Header';
 import ProjectDetailClient from '@/components/ProjectDetailClient';
 
 export default async function ProjectPage({
@@ -8,8 +7,7 @@ export default async function ProjectPage({
 }) {
   const { id } = await params;
   return (
-    <main className="min-h-screen bg-[#F9F9F7] text-[#111111]">
-      <Header />
+    <main className="bg-[#F9F9F7] text-[#111111]">
       <ProjectDetailClient projectId={id} />
     </main>
   );
